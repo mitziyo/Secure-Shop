@@ -1,0 +1,248 @@
+const { Router } = require('express');
+const { validationResult } = require('express-validator');
+const { Order, Cart } = require('../models');
+const { validateOrder, sanitizeInput } = require('../middleware/validation');
+const { requireAuth, requireAdmin } = require('../middleware/auth');
+
+const router = Router();
+
+// Checkout route
+router.get('/checkout', requireAuth, async (req, res) => {
+  try {
+    const cartItems = await Cart.getCart(req.session.user.id);
+    const total = await Cart.getCartTotal(req.session.user.id);
+
+    if (cartItems.length === 0) {
+      return res.redirect('/cart');
+    }
+
+    res.render('orders/checkout', {
+      cartItems,
+      total,
+      user: req.session.user,
+      errors: null
+    });
+  } catch (error) {
+    console.error('Error loading checkout:', error);
+    res.render('error', { message: 'Error loading checkout' });
+  }
+});
+
+// Customer routes
+router.get('/', requireAuth, async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    const orders = await Order.findByUserId(req.session.user.id, limit, offset);
+
+    res.render('orders/index', {
+      orders,
+      currentPage: page,
+      user: req.session.user
+    });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.render('error', { message: 'Error loading orders' });
+  }
+});
+
+router.get('/:id', requireAuth, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    // Customers may only see their own orders; admins can open any order from the admin console
+    const isAdmin = req.session.user.role === 'admin';
+    if (!order || (order.user_id !== req.session.user.id && !isAdmin)) {
+      return res.render('error', { message: 'Order not found' });
+    }
+
+    res.render('orders/show', { order, user: req.session.user });
+  } catch (error) {
+    console.error('Error fetching order:', error);
+    res.render('error', { message: 'Error loading order' });
+  }
+});
+
+
+
+router.post('/checkout', requireAuth, sanitizeInput, validateOrder, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // Reload cart items for error display
+    const cartItems = await Cart.getCart(req.session.user.id);
+    const total = await Cart.getCartTotal(req.session.user.id);
+
+    return res.render('orders/checkout', {
+      cartItems,
+      total,
+      user: req.session.user,
+      errors: errors.array()
+    });
+  }
+
+  try {
+    const { shipping_address, payment_method } = req.body;
+    const userId = req.session.user.id;
+
+    const total = await Cart.getCartTotal(userId);
+
+    if (total === 0) {
+      return res.render('orders/checkout', {
+        cartItems: [],
+        total: 0,
+        user: req.session.user,
+        errors: [{ msg: 'Your cart is empty' }]
+      });
+    }
+
+    // Get cart items to create order items and update stock
+    const cartItems = await Cart.getCart(userId);
+
+    const orderData = {
+      user_id: userId,
+      total_amount: total,
+      shipping_address,
+      payment_method
+    };
+
+    const order = await Order.createOrder(orderData);
+
+    // Cart is already cleared in createOrder
+    res.redirect(`/orders/${order.id}`);
+  } catch (error) {
+    console.error('Error creating order:', error);
+
+    // Reload cart items for error display
+    const cartItems = await Cart.getCart(req.session.user.id);
+    const total = await Cart.getCartTotal(req.session.user.id);
+
+    res.render('orders/checkout', {
+      cartItems,
+      total,
+      user: req.session.user,
+      errors: [{ msg: error.message || 'Error creating order' }]
+    });
+  }
+});
+
+// Admin routes
+router.get('/admin/all', requireAdmin, async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 20;
+    const offset = (page - 1) * limit;
+
+    const orders = await Order.getAllOrders(limit, offset);
+
+    res.render('admin/orders/index', {
+      orders,
+      currentPage: page,
+      user: req.session.user,
+      csrfToken: req.csrfToken?.()
+    });
+  } catch (error) {
+    console.error('Error fetching all orders:', error);
+    res.render('error', { message: 'Error loading orders' });
+  }
+});
+
+router.post('/:id/status', requireAdmin, sanitizeInput, async (req, res) => {
+  try {
+    console.log('\n📍 Status update request received');
+    console.log('Order ID:', req.params.id);
+    console.log('Request body:', req.body);
+    console.log('CSRF token from header:', !!req.headers['x-csrf-token']);
+    console.log('CSRF token valid:', !!req.csrfToken);
+
+    const { status } = req.body;
+    const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+
+    if (!validStatuses.includes(status)) {
+      console.log('❌ Invalid status:', status);
+      return res.status(400).json({ message: 'Invalid status' });
+    }
+
+    console.log('Calling Order.updateStatus with:', req.params.id, status);
+    const order = await Order.updateStatus(req.params.id, status);
+
+    if (!order) {
+      console.log('❌ Order not found:', req.params.id);
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    console.log('✅ Order status updated successfully:', order.id, 'to', status);
+    res.json({ message: 'Order status updated', order });
+  } catch (error) {
+    console.error('❌ Error updating order status:', error);
+    res.status(500).json({ message: 'Error updating order status' });
+  }
+});
+
+// Cancel order (restore stock)
+router.post('/:id/cancel', requireAuth, async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const userId = req.session.user.id;
+
+    // Get order and verify ownership
+    const order = await Order.findByPk(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    if (order.user_id !== userId) {
+      return res.status(403).json({ message: 'Not authorized to cancel this order' });
+    }
+
+    // Only allow cancelling pending orders
+    if (order.status !== 'pending') {
+      return res.status(400).json({ message: `Cannot cancel ${order.status} orders` });
+    }
+
+    // Get order items to restore stock
+    const orderItems = await Order.sequelize.models.OrderItem.findAll({
+      where: { order_id: orderId },
+      include: [{
+        model: Order.sequelize.models.Product,
+        as: 'product',
+        attributes: ['id', 'name', 'stock_quantity']
+      }]
+    });
+
+    // Restore stock for each item
+    for (const item of orderItems) {
+      const restoredStock = item.product.stock_quantity + item.quantity;
+      await Order.sequelize.models.Product.update(
+        { stock_quantity: restoredStock },
+        { where: { id: item.product_id } }
+      );
+      console.log(`↩️  Stock restored (cancel order): Product ${item.product_id} (${item.product.name}) stock: ${item.product.stock_quantity} → ${restoredStock}`);
+    }
+
+    // Update order status to cancelled
+    order.status = 'cancelled';
+    await order.save();
+
+    console.log(`✅ Order ${orderId} cancelled and stock restored`);
+    res.json({ message: 'Order cancelled and stock restored', order });
+  } catch (error) {
+    console.error('Error cancelling order:', error);
+    res.status(500).json({ message: 'Error cancelling order' });
+  }
+});
+
+// API routes for AJAX functionality
+router.get('/api/recent', requireAuth, async (req, res) => {
+  try {
+    const orders = await Order.findByUserId(req.session.user.id, 5, 0);
+    res.json(orders);
+  } catch (error) {
+    console.error('Error fetching recent orders:', error);
+    res.status(500).json({ message: 'Error fetching recent orders' });
+  }
+});
+
+module.exports = router;
