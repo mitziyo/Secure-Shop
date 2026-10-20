@@ -1,0 +1,10 @@
+{{#if errors}}
+<div class="ex-alert ex-alert--error" role="alert">
+  <span class="msi">warning</span>
+  <ul>
+    {{#each errors}}
+    <li>{{#if msg}}{{msg}}{{else}}{{this}}{{/if}}</li>
+    {{/each}}
+  </ul>
+</div>
+{{/if}}

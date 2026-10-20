@@ -1,0 +1,58 @@
+{{! Shared by admin/products/new and edit. Pass action="..." and submitLabel="..." }}
+<form class="ex-form" method="POST" action="{{action}}">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  {{> elite_errors}}
+
+  <div class="ex-field">
+    <label class="ex-label" for="name">Product name *</label>
+    <input class="ex-input" type="text" id="name" name="name" value="{{product.name}}" required minlength="1" maxlength="100">
+  </div>
+
+  <div class="ex-field">
+    <label class="ex-label" for="description">Description *</label>
+    <textarea class="ex-input" id="description" name="description" rows="4" required minlength="10" maxlength="1000">{{product.description}}</textarea>
+    <span class="ex-help">10–1000 characters.</span>
+  </div>
+
+  <div class="ex-form-row">
+    <div class="ex-field">
+      <label class="ex-label" for="price">Price *</label>
+      <div class="ex-input-group">
+        <span class="ex-input-group__prefix">$</span>
+        <input class="ex-input" type="number" id="price" name="price" step="0.01" min="0" value="{{product.price}}" required>
+      </div>
+    </div>
+    <div class="ex-field">
+      <label class="ex-label" for="stock_quantity">Stock quantity *</label>
+      <input class="ex-input" type="number" id="stock_quantity" name="stock_quantity" min="0" value="{{product.stock_quantity}}" required>
+    </div>
+  </div>
+
+  <div class="ex-field">
+    <label class="ex-label" for="category">Category *</label>
+    <div class="ex-select-wrap">
+      <select class="ex-select" id="category" name="category" required>
+        <option value="">Select category</option>
+        <option value="Electronics" {{#if (eq product.category "Electronics")}}selected{{/if}}>Electronics</option>
+        <option value="Accessories" {{#if (eq product.category "Accessories")}}selected{{/if}}>Accessories</option>
+        <option value="Books" {{#if (eq product.category "Books")}}selected{{/if}}>Books</option>
+        <option value="Clothing" {{#if (eq product.category "Clothing")}}selected{{/if}}>Clothing</option>
+        <option value="Home &amp; Office" {{#if (eq product.category "Home & Office")}}selected{{/if}}>Home &amp; Office</option>
+        <option value="Home &amp; Kitchen" {{#if (eq product.category "Home & Kitchen")}}selected{{/if}}>Home &amp; Kitchen</option>
+        <option value="Sports" {{#if (eq product.category "Sports")}}selected{{/if}}>Sports</option>
+      </select>
+      <span class="msi">arrow_drop_down</span>
+    </div>
+  </div>
+
+  <div class="ex-field">
+    <label class="ex-label" for="image_url">Image URL</label>
+    <input class="ex-input" type="text" id="image_url" name="image_url" value="{{product.image_url}}" placeholder="/images/products/example.jpg or https://...">
+    <span class="ex-help">Optional. A path under /images/products or a full https URL.</span>
+  </div>
+
+  <div class="ex-form-actions">
+    <button type="submit" class="ex-btn ex-btn--solid"><span class="msi">check_circle</span>{{submitLabel}}</button>
+    <a href="/products/admin" class="ex-btn ex-btn--ghost">CANCEL</a>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+{{! pass section="dashboard|products|orders|users|analytics|logs" }}
+<nav class="ex-subnav" aria-label="Admin">
+  <span class="ex-subnav__label"><span class="msi">admin_panel_settings</span>ADMIN CONSOLE</span>
+  <div class="ex-subnav__links">
+    <a href="/admin" class="{{#if (eq section "dashboard")}}is-active{{/if}}"><span class="msi">dashboard</span>Dashboard</a>
+    <a href="/products/admin" class="{{#if (eq section "products")}}is-active{{/if}}"><span class="msi">inventory_2</span>Products</a>
+    <a href="/orders/admin/all" class="{{#if (eq section "orders")}}is-active{{/if}}"><span class="msi">receipt_long</span>Orders</a>
+    <a href="/admin/users" class="{{#if (eq section "users")}}is-active{{/if}}"><span class="msi">group</span>Users</a>
+    <a href="/admin/analytics" class="{{#if (eq section "analytics")}}is-active{{/if}}"><span class="msi">bar_chart</span>Analytics</a>
+    <a href="/admin/logs" class="{{#if (eq section "logs")}}is-active{{/if}}"><span class="msi">security</span>Logs</a>
+  </div>
+</nav>
