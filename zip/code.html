@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SECURESHOP // ELITE — Tactical &amp; Developer Hardware Catalog</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Space Grotesk, Inter, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#e1e2e8",
+            "on-surface-variant": "#b9cbbc",
+            "outline-variant": "#3b4a3f",
+            "surface-container-low": "#191c20",
+            "on-secondary": "#00363d",
+            "tertiary": "#fffaff",
+            "secondary": "#bdf4ff",
+            "primary-fixed-dim": "#00e38b",
+            "on-secondary-fixed-variant": "#004f58",
+            "on-secondary-container": "#00616d",
+            "on-surface": "#e1e2e8",
+            "secondary-fixed-dim": "#00daf3",
+            "on-tertiary": "#670020",
+            "surface-container": "#1d2024",
+            "tertiary-container": "#ffd5d8",
+            "surface-variant": "#32353a",
+            "on-tertiary-container": "#c50045",
+            "on-primary-fixed-variant": "#00522f",
+            "tertiary-fixed-dim": "#ffb2ba",
+            "primary": "#f4fff3",
+            "outline": "#849587",
+            "secondary-fixed": "#9cf0ff",
+            "tertiary-fixed": "#ffd9dc",
+            "on-secondary-fixed": "#001f24",
+            "inverse-primary": "#006d40",
+            "surface-bright": "#36393e",
+            "primary-fixed": "#56ffa8",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "on-primary": "#00391f",
+            "surface-container-highest": "#32353a",
+            "surface-container-high": "#272a2f",
+            "on-error-container": "#ffdad6",
+            "primary-container": "#00ff9d",
+            "background": "#111418",
+            "inverse-surface": "#e1e2e8",
+            "surface-tint": "#00e38b",
+            "on-tertiary-fixed-variant": "#910030",
+            "surface-container-lowest": "#0b0e12",
+            "inverse-on-surface": "#2e3135",
+            "on-error": "#690005",
+            "surface": "#111418",
+            "surface-dim": "#111418",
+            "on-primary-container": "#007143",
+            "on-primary-fixed": "#002110",
+            "on-tertiary-fixed": "#400011",
+            "secondary-container": "#00e3fd"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-2xl": "4rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter", "sans-serif"],
+            "display-mobile": ["Space Grotesk", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "label-mono-lg": ["JetBrains Mono", "monospace"],
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "label-mono-sm": ["JetBrains Mono", "monospace"],
+            "headline-lg-mobile": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "display": ["Space Grotesk", "sans-serif"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "label-mono-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "label-mono-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    
+    /* Technical micro-grid substrate */
+    .bg-micro-grid {
+      background-size: 24px 24px;
+      background-image: 
+        radial-gradient(circle, rgba(0, 255, 157, 0.08) 1px, transparent 1px);
+    }
+    
+    /* Custom cyber scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0e12;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #272a2f;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff9d;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-surface-container-lowest">
+<!-- Top Command Telemetry Header Bar -->
+<header class="bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-md docked full-width top-0 sticky z-50 border-b border-outline-variant/40 dark:border-outline-variant/40 shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)]">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex items-center justify-between h-16">
+<!-- Left: Brand Logo & Terminal Search -->
+<div class="flex items-center gap-space-lg">
+<a class="flex items-center gap-2 group" href="#">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-primary-container/40 flex items-center justify-center text-primary-container shadow-[0_0_12px_rgba(0,255,157,0.2)] group-hover:border-primary-container transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm tracking-wider text-primary dark:text-primary uppercase font-bold">SECURESHOP // ELITE</span>
+<span class="font-label-mono-sm text-[9px] tracking-widest text-primary-container leading-none opacity-80">VERIFIED DEFENSE PROTOCOL</span>
+</div>
+</a>
+<!-- Terminal Search Field -->
+<div class="hidden lg:flex items-center relative w-72">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container pl-9 pr-12 py-1.5 rounded font-label-mono-sm text-label-mono-sm text-on-surface placeholder:text-on-surface-variant/60 outline-none transition-all" placeholder="⌘K or / to search inventory, SKUs, chipsets..." type="text"/>
+<kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-sm text-[10px] border border-outline-variant/50">⌘K</kbd>
+</div>
+</div>
+<!-- Center: Navigation Links -->
+<nav class="hidden md:flex items-center gap-space-md">
+<a class="text-primary-container dark:text-primary-container border-b-2 border-primary-container font-label-mono-sm text-label-mono-sm uppercase tracking-wider pb-1" href="#">Hardware</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary font-label-mono-sm text-label-mono-sm uppercase tracking-wider pb-1 transition-colors" href="#">Apparel</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary font-label-mono-sm text-label-mono-sm uppercase tracking-wider pb-1 transition-colors" href="#">Literature</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary font-label-mono-sm text-label-mono-sm uppercase tracking-wider pb-1 transition-colors" href="#">Telemetry</a>
+</nav>
+<!-- Right: Security Verification & Actions -->
+<div class="flex items-center gap-3">
+<!-- Live Telemetry Pill -->
+<div class="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container border border-outline-variant/30 font-label-mono-sm text-[10px]">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse shadow-[0_0_8px_#00ff9d]"></span>
+<span class="text-on-surface-variant">OWASP L3</span>
+<span class="text-outline-variant">|</span>
+<span class="text-secondary-fixed">8ms</span>
+</div>
+<!-- Trailing Primary Action: YubiKey Auth -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-container-high border border-primary-container/40 text-primary-container hover:bg-primary-container hover:text-surface-container-lowest font-label-mono-sm text-label-mono-sm transition-all duration-150 shadow-[0_0_12px_rgba(0,255,157,0.1)] active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified_user">verified_user</span>
+<span class="hidden sm:inline">YUBIKEY AUTH</span>
+</button>
+<!-- Trailing Secondary Action: Escrow Cart -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded bg-surface-container border border-secondary-container/40 text-secondary hover:border-secondary-container hover:bg-secondary-container/10 font-label-mono-sm text-label-mono-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]" data-icon="shopping_bag">shopping_bag</span>
+<span>ESCROW CART [0]</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Sub-Header Status Ticker -->
+<div class="bg-surface-container-low border-b border-outline-variant/30 py-2">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex items-center justify-between text-on-surface-variant font-label-mono-sm text-[11px]">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5 text-primary-container">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+<span>AIR-GAPPED TELEMETRY ACTIVE</span>
+</span>
+<span class="hidden sm:inline text-outline-variant">/</span>
+<span class="hidden sm:inline text-on-surface-variant font-label-mono-sm">MERKLE ROOT: 0x9b4a...f721</span>
+<span class="hidden md:inline text-outline-variant">/</span>
+<span class="hidden md:inline text-on-surface-variant">OPERATIONAL CLEARANCE: ROOT L3</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-on-surface-variant">CURRENCY: <strong class="text-on-surface font-semibold">$ USD (SAT/BTC ENABLED)</strong></span>
+<span class="text-outline-variant">|</span>
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container" data-icon="account_circle">account_circle</span>
+          mizhyo_
+        </span>
+</div>
+</div>
+</div>
+<!-- Main Body Canvas -->
+<main class="w-full max-w-[1440px] mx-auto px-margin py-space-lg flex-1 flex flex-col md:flex-row gap-space-lg bg-micro-grid">
+<!-- Left Taxonomy Matrix / Filter Sidebar -->
+<aside class="w-full md:w-72 shrink-0 flex flex-col gap-y-space-md bg-surface-container-low border border-outline-variant/30 p-space-md rounded">
+<!-- Sidebar Header Matrix Indicator -->
+<div class="border-b border-outline-variant/30 pb-space-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-headline-sm text-sm text-primary font-bold tracking-wider">TAXONOMY MATRIX</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px]">L3 ROOT</span>
+</div>
+<p class="font-label-mono-sm text-[10px] text-on-surface-variant">CLEARANCE LEVEL: ROOT L3</p>
+</div>
+<!-- Categories Tree (Aligned with Image 5 Categories & Shared Components) -->
+<div class="flex flex-col gap-1">
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant/80 uppercase tracking-widest px-2 mb-1">Inventory Modules</span>
+<a class="flex items-center justify-between px-3 py-2.5 bg-surface-container-high text-primary-container border-l-2 border-primary-container font-label-mono-sm text-label-mono-sm rounded-r" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="grid_view">grid_view</span>
+<span>All Products</span>
+</div>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-surface-container text-primary-container">11</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-container/50 hover:text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="desktop_windows">desktop_windows</span>
+<span>Workstation Ergonomics</span>
+</div>
+<span class="text-[10px] font-mono text-outline">3</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-container/50 hover:text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="apparel">apparel</span>
+<span>Tactical Apparel</span>
+</div>
+<span class="text-[10px] font-mono text-outline">2</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-container/50 hover:text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+<span>Cryptographic Literature</span>
+</div>
+<span class="text-[10px] font-mono text-outline">2</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-container/50 hover:text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="cable">cable</span>
+<span>Cable &amp; Power Matrix</span>
+</div>
+<span class="text-[10px] font-mono text-outline">2</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface-variant hover:bg-surface-container/50 hover:text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+<span>Optical &amp; Screen Armor</span>
+</div>
+<span class="text-[10px] font-mono text-outline">2</span>
+</a>
+</div>
+<!-- Technical Filter: Live Telemetry & Availability -->
+<div class="border-t border-outline-variant/30 pt-space-sm flex flex-col gap-2">
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant/80 uppercase tracking-widest px-2">Hardware Status</span>
+<label class="flex items-center gap-2.5 px-2 py-1 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-outline-variant bg-surface-container text-primary-container focus:ring-0 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary-container transition-colors">In Stock Only (Real-time RFID)</span>
+</label>
+<label class="flex items-center gap-2.5 px-2 py-1 cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded border-outline-variant bg-surface-container text-primary-container focus:ring-0 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary-container transition-colors">Air-gapped verification</span>
+</label>
+<label class="flex items-center gap-2.5 px-2 py-1 cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container text-primary-container focus:ring-0 focus:ring-offset-0 transition-colors" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary-container transition-colors">OWASP Level-3 Certified</span>
+</label>
+</div>
+<!-- Price Spectrum Slider -->
+<div class="border-t border-outline-variant/30 pt-space-sm flex flex-col gap-2">
+<div class="flex items-center justify-between px-2">
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant uppercase tracking-widest">Escrow Ceiling</span>
+<span class="font-label-mono-sm text-xs text-primary-container">$10 — $150</span>
+</div>
+<div class="px-2">
+<input class="w-full accent-primary-container bg-surface-container-high h-1.5 rounded cursor-pointer" max="150" min="10" type="range" value="150"/>
+</div>
+</div>
+<!-- Action Button: Apply Matrix Filters -->
+<button class="w-full py-2 px-3 mt-1 bg-surface-container-high border border-primary-container/40 hover:border-primary-container text-primary-container hover:bg-primary-container hover:text-surface-container-lowest font-label-mono-sm text-label-mono-sm font-semibold rounded uppercase tracking-wider transition-all duration-150 active:scale-[0.99] flex items-center justify-center gap-2 shadow-[0_0_12px_rgba(0,255,157,0.1)]">
+<span class="material-symbols-outlined text-[16px]" data-icon="tune">tune</span>
+<span>APPLY FILTERS</span>
+</button>
+<!-- Sidebar Security Ledger Footer -->
+<div class="mt-auto border-t border-outline-variant/30 pt-space-sm flex flex-col gap-1.5">
+<div class="flex items-center gap-2 px-2 py-1 text-on-surface-variant font-label-mono-sm text-[10px]">
+<span class="material-symbols-outlined text-[14px] text-primary-container" data-icon="security">security</span>
+<span>Security Ledger: SYNCED</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1 text-on-surface-variant font-label-mono-sm text-[10px]">
+<span class="material-symbols-outlined text-[14px] text-secondary-container" data-icon="key">key</span>
+<span>Hardware Key Active (FIPS-140)</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<div class="flex-1 flex flex-col gap-space-md">
+<!-- Catalog Control Header & Meta Strip -->
+<div class="bg-surface-container-low border border-outline-variant/30 p-space-md rounded flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<h1 class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">Products Catalog</h1>
+<span class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant/40 text-primary-container font-label-mono-sm text-[11px]">
+              11 ASSETS ACTIVE
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Showing all 11 classified developer items with real-time Merkle inventory validation.
+          </p>
+</div>
+<!-- Sorting & Views Bar -->
+<div class="flex items-center gap-2">
+<div class="relative">
+<select class="bg-surface-container border border-outline-variant/40 rounded px-3 py-1.5 pr-8 font-label-mono-sm text-label-mono-sm text-on-surface focus:outline-none focus:border-secondary-container appearance-none cursor-pointer">
+<option>SORT: HIGHEST SECURITY CLEARANCE</option>
+<option>SORT: PRICE (LOW TO HIGH)</option>
+<option>SORT: STOCK DEPTH</option>
+<option>SORT: RECENT ALLOCATION</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-[16px] text-on-surface-variant pointer-events-none" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<div class="flex items-center border border-outline-variant/40 rounded overflow-hidden">
+<button class="p-1.5 bg-surface-container-high text-primary-container border-r border-outline-variant/40" title="Grid View">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+</button>
+<button class="p-1.5 bg-surface-container text-on-surface-variant hover:text-on-surface" title="List View">
+<span class="material-symbols-outlined text-[18px]" data-icon="view_list">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 11 Products Grid (Bento/Tactile Matrix Elevated Standard) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- PRODUCT 1: Artisan Walnut Desk Organizer -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">SOLID WALNUT</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="An artisanal solid walnut desk organizer crafted with precise CNC machined slots and polished wood grain against a moody deep obsidian background. Dramatic focused warm spotlight casts soft geometric shadows over compartmentalized trays holding high-end titanium pens and brass mechanical keys. Minimalist luxury tech office aesthetic with extreme photorealistic detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaBTs10PWcsi6Wq4sGYOxN0wXHPfy0UwsLzJNFoa0zn6mnlZcnnhBdgqxCouc2LPOvcNo4luHsojSUu32k7O_5k3M0WflNTyLWlKs7FE4AUrZcek81YPjA_OA1QpoV4Jb-DZ2e5kyaL6bObO06QKU-nMl6OsgHpMsSieNADdvbzfL86uzmxwRGhjW6_t5obZkvZOCD4OEfeFZRyp4MAp65AMASr144iQorabfsWcyUbZ7VMMc4qKsWbw"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x8F91
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Artisan Walnut Desk Organizer</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Solid black walnut with precision milled slots for cryptographic tokens, pens, and integrated cable routing channel.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$44.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 40 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 2: Ergonomic Anti-Fatigue Chair Mat -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-secondary-container/30 text-secondary-container font-label-mono-sm text-[9px] tracking-wider uppercase">ERGO CERTIFIED</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Premium ergonomic anti-fatigue heavy floor mat beneath a stealth matte black ergonomic mesh engineering chair. Surface features calculated textured acupressure terrain nodules and high-density polyurethane material on an obsidian slate studio floor. Clean rim lighting with subtle emerald cyber glows reflecting along the tapered beveled edge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjvhLxIFCMCsMPT1Gk9Gi1ZdmSaC74aCYM0LPZ7pysR8MFxD0XNiU4b_z0cD0LBDOit0jgU4tOJH_jsNfjpdmo6YNg3BRd8F4XclcZIG2v1YkJJvHbX2dkIBhOmveen-YxMwX2KOhkMPI_gpe7w0b1jG-74A94gMkr_y4S4IU7bkye6ZmYVf6rIpUSYS76GkmuG5r7zjw4x3uxQzyECQofkVDsn4R2Y_jgJ7GteIkxQG0k6gdLP4tl-g"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x3E12
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Ergonomic Anti-Fatigue Chair Mat</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Multi-density polyurethane mat with tactile reflexology acupressure zones designed for long developer compile sessions.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$54.99</span>
+<span class="font-label-mono-sm text-xs text-secondary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container inline-block"></span>
+                Stock: 15 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 3: Programmer Binary Matrix Socks -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">SILVER WEAVE</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Pair of technical black cotton developer socks featuring luminous glowing green binary digits zero and one cascading down the sides like terminal matrix code. Photographed flat-lay on dark brushed carbon fiber backdrop with subtle neon ambient illumination highlighting anti-static silver threads woven into the heel and toe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv_NHHKA77nlmCPWwAzuRboUZq223yosmbu4Qlh6k0vKEDkQDV17J6Le93j3CD1PKF2IHFdYVXKM_38AMjUDRskepyUR6eRnWzBLvjdYAkiKiwypAOsdqqizqaeAaERtNNYE6U1IQ-alMtx776a4cjM5allhVX9ARwfN_wAVYaJ_MpptyHD6IXIcW9E1L_1jnyjonHzI7LsMP046kmO4A2pCAoSlDYpiFef7FEgfpoHppH4DCN-6j5UA"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x110B
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Programmer Binary Matrix Socks</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Terminal code patterned socks with reinforced arch compression and embedded anti-static ESD silver threads.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$14.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 150 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 4: Developer Heavyweight Hoodie -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">FARADAY POCKET</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Heavyweight luxury matte black hoodie with minimalist geometric bracket graphic reading DEVELOPER on chest. Hanging on a matte metal industrial coat rack against an architectural concrete and dark acoustic slat wall. Moody chiaroscuro studio lighting with crisp edge definition showcasing the dense 480GSM French loopback cotton texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXnzjAY-MhP71HdvRayfCbKccwD4Gp9jdDxuE4ZN0i4Bnh-_hcjDNgjYPLx7FLgrE3YAwdptRmGT9dTtUIJpf3UOCGOsDJ8NKPM0AIGDhWVBEhGX2m-Yxm9IKMfcQkVKDTvN154liwUL9EjMeRZd-AYLlKTa6E1Yc-MNA8dCxrEJ3lVrZgB3pZkWgwirc83w4uDgg5Jl5NQOEm5LvkKixWUF1XroH4uHe8dFpyz7KKOegrn--e0xf0iQ"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x5D4C
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Developer Heavyweight Hoodie</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              480GSM loopback cotton with stealth cryptographic YKK zips, interior Faraday pocket, and reinforced elbow pads.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$59.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 50 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 5: Programming 'Thinking Not Typing' T-Shirt -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-outline-variant/40 text-on-surface-variant font-label-mono-sm text-[9px] tracking-wider uppercase">100% COMBED</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Deep navy and charcoal crewneck t-shirt featuring sharp cyan typography stating PROGRAMMING IS THINKING NOT TYPING printed across the chest. Clean editorial catalog lighting displaying heavy 260GSM combed organic cotton fabric draped elegantly on an obsidian stone pedestal with subtle blue studio ambient rim glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkC-tXBuscuM_THoGrPpyJXlVtnMFS0CtPGO4jc75AzlxD2GPAeNydd0ETYzuDrL5JpleZ-bG3d3l5EUhnR3q4LJpoRqKtWYPOqxVC9kVZtYRQmOaq9XsUKH1HH-fp9NuMhuMparjHMpDCIvEYPOlcbjz-HX6ZukLsIOeWaVh9c_G9XtX1BMoDzcG1M8xPshAlKqD3I6wmx-KPsJY44PbI67n4E_i9mE5K6XGFY5odANu69DVLAZZPTw"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x98A1
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Programming 'Thinking Not Typing' T-Shirt</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Ultra-durable combed ring-spun organic cotton featuring reflective silk-screened minimalist typography.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$29.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 100 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 6: Anodized Aerospace Cable Organizer -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">BILLET ALLOY</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="An array of high-grade silicone and CNC milled black anodized aluminum magnetic desktop cable clips neatly clamping braided USB-C and Thunderbolt cables. Ultra crisp macro lens focus on a dark graphite desk surface with sharp micro bevel highlights and futuristic emerald technical lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgcnD4SvNqliAEYIWdBQeAu_3sYOfjo5JG4mEso0PqHGwom1vzMB2bfvKKzr9nMplCezYOtkC5pQaGmBq0olabv3EXvzVAqdOIzRSGzP--DV57-ptBpQXqg3l4liegKhuQbHRoxF7HBKmtmeolWMqiOcV7VeDwdUGGEOfeJ6CLIv9h4aEsrEja2hMiBSWps3JZr0HpE9oRHStsnRtBcUfWK5XeA-krSMp2cyrSVjFkFibTA9UPEnX3Ig"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x228F
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Aerospace Magnetic Cable Organizer</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Weighted silicone base with Neodymium N52 magnetic collar clips for high-throughput braided workstation cables.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$9.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 200 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 7: Asymmetric ScreenBar Monitor Lamp -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-secondary-container/30 text-secondary-container font-label-mono-sm text-[9px] tracking-wider uppercase">CRI &gt; 95</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Sleek matte black asymmetric LED screenbar monitor light bar clamped securely to the top of an ultra-wide workstation display. Emits a smooth, glare-free warm 4000K illumination casting zero reflections onto the dark screen, illuminating a mechanical keyboard and precision desk pad below. High-end hacker workstation night setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoS-FxnA3r8wP_WBmuF8fPKaHuG4S1yIcNStiHFPYp5LDHf7SG3zIv1D5zoHw1JhRFw3uxGAgPyoA1juUJNmO5qB8qO66vYWwXzoqCYzKzEku_YsVJa3m2CYRZReye0V50W0K9TsLj0XfwdoFZ-XAqAh6PZL14Mr2gueKi5Pa2Rtfi9fcYy5uOwHRUW3gHNpoKLMfvUbiIZVS47a-TPATndU07NHAkNcyl4EdMneu-cqHO1QUt7mEN4g"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x77EA
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Asymmetric ScreenBar Monitor Lamp</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              USB-C powered glare-free LED bar with auto-dimming ambient optical sensors and zero screen glare reflection.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$22.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 60 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 8: Adjustable Aluminum Laptop Stand -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">CNC AIR-FRAME</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Foldable sandblasted silver aerospace aluminum laptop riser stand with dual precision damping pivot hinges and hexagonal thermal ventilation cutouts. Set in a sterile dark studio environment with focused studio top light highlighting metallic chamfered edges and anti-slip silicone contact pads." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeSA2LkSq73l2DpwkRKqT7iH4wbU1m4CaznVWx6NlfCzarVh4e0r2azAHZhoLpoeEegf3qKeTrpC4zaBQ77xIqPDvXRW3vZUVtRs1Uf2byrQ4WTlKCtPrpxWvXwec_KofnT9ZTc6sVhUpU0bW6b6qLQUb00_AuYAzvkCARd0WTf_bD4GSU3xJRWJ7XHSRe0SWzEqSBIzTWXNi_WnlxgrW4A2eIIfAAiJsBI30J18yhJHDBi8_qLdxcLQ"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x44B3
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Adjustable Aluminum Laptop Stand</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Aircraft-grade sandblasted alloy with dual-axis stepless hinges, passive thermal exhaust slits, and silicone cable management.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$34.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 60 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 9: Military Drop-Tested Phone Case -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-outline-variant/40 text-secondary font-label-mono-sm text-[9px] tracking-wider uppercase">ARAMID / MIL-SPEC</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Tactical stealth dark gray and iridescent aramid fiber smartphone case with reinforced shock-absorbing corner bumpers and MagSafe magnetic ring array. Floating angled against a textured carbon slate background with sharp edge illumination showcasing rugged defensive aerospace materials." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz9x6BVNoTei9p8KSZVoKl_QnIOToe-ANGpWi5hucXx3fkGvLh6Ybq1PwaaJNE563XY7d5O6rHYGJWymz-TtlAUJU-YTvpVQAymgmgfxIwtN2qnvq8qeUkOXHKvmE2Ne8PZAPWPbFSqmsdAFwhFvN7hH_7YMqCifs4SwJK0ofSLzDd0WRWD502y97EJTJGbije3aZY_z4auUBMLXflro94dDwpM6Zujkk1pcm48MK53xIBbIHdZavlaw"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x66FF
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">Tactical Armor Smartphone Case</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              MIL-STD-810G certified 1500D aramid fiber and liquid silicone perimeter with embedded N52 rare-earth magnetic array.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$24.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 120 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 10: 9H Oleophobic Screen Protector -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden">
+<div class="absolute top-2 right-2 z-10 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">9H HARDNESS</span>
+</div>
+<div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden mb-space-sm border border-outline-variant/20 group-hover:border-primary-container/30 transition-colors">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High precision edge-to-edge optical tempered glass screen protector hovering above a pristine black smartphone screen with water droplets beading perfectly due to nanoscopic oleophobic coating. Clean macro studio photography with crisp cyan refraction along curved beveled edges against dark void." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAWKwUcWvZNpOclPFh0Us_5StQ7R92WUIof8TDi84eIMwpzEPaGA8GehytBYnCzFFPZp1FYH3NcFDI-YozffXb3ZeNvp0kYNfmsbQwEhOi8yOC-qB6ToZg8DR0oKyJ2TYtdoqEiDZhLTfW2FvYZRur9824bEuwlYoVtsgl-vPNhmCrzKfim1wqK0Xnt66jIWZsbLnRbgfxVz6jzK3vM_G61VFFQKejAoLakKWm-K33ZhXABcgmkfOONA"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/40">
+                RFID: 0x90C2
+              </div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-base text-primary font-semibold group-hover:text-primary-container transition-colors">9H Oleophobic Tempered Glass Armor</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-sm">
+              Double-tempered aluminosilicate screen glass with electroplated oleophobic oil barrier and anti-peep micro-louver privacy filter.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-baseline justify-between">
+<span class="font-headline-md text-xl text-primary font-bold font-mono">$12.99</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                Stock: 150 units
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs text-center transition-all">
+                View Details
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold text-center transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add to Cart
+              </button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 11: Cracking the Coding Interview & The Pragmatic Programmer (Dual Edition) -->
+<div class="bg-surface-container-low/70 backdrop-blur-md border border-outline-variant/30 hover:border-primary-container/60 rounded p-space-md flex flex-col justify-between group transition-all duration-200 hover:shadow-[0_0_24px_-4px_rgba(0,255,157,0.15)] relative overflow-hidden sm:col-span-2 lg:col-span-2">
+<div class="absolute top-2 right-2 z-10 flex gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-primary-container/30 text-primary-container font-label-mono-sm text-[9px] tracking-wider uppercase">COMPACT SET</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest/90 border border-secondary-container/30 text-secondary font-label-mono-sm text-[9px] tracking-wider uppercase">HARDCOVER BUNDLE</span>
+</div>
+<div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm mb-space-sm">
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Collector edition hardcover book of Cracking the Coding Interview with striking chartreuse green cover and alarm clock graphic on dark textured linen binding. Set on an obsidian stone desk flanked by a warm brass desk lamp with subtle moody code reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrS50OfJ8VibiBOuhk0UYEFDD9qabWtScDNcx8LtOuHI53Ov0WSZW_STCFfltjDXUA-bMNtOnUIwCa5UlNSmtfNpyr-35jMvX71SrqstgsuJimrS_T5mCqg0xqR_LiWqbhUO_VRqm4tGuRKvDDpW0AazwHAbqxPC4ZwlrXl4cukmL1tr_TNaA1c_p0o1ego2M6KUKM3i4c_1KKE2DmqWEHfrBxJWZhq4RMGh088zBLWMWiOkX0xkxlzA"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant">
+                  VOL 1: 189 QUESTIONS
+                </div>
+</div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="The Pragmatic Programmer 20th Anniversary Edition hardcover book featuring classic dark embossed cover with architectural diagram engraving. Soft ambient side lighting highlights gold foil lettering on a brushed black aluminum desk alongside an encrypted hardware key." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTLUt9gA0MahqYkj7A6q24x2k25rpSL3rw33c0KMxZLPIQt6bAn1wnD9_QTQ7ZK8aUdu9lNxPnHwY36V5rsknnVjpr09rqGsgQDlIpvgyeyLKuwrC3UumME2huCn6tblmbUKrQFdgmmqUN-Wq-3qnu9c3S76PH2LcCTkNOMKeb3uckSCYIjIlwF3GpRvn7Mf4444rs_6B4sC7ufm4rsw2x23dwXSVZjEiG71AltjssFj9ICAQmZl52aA"/>
+<div class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 font-label-mono-sm text-[10px] text-on-surface-variant">
+                  VOL 2: 20TH ANNIV.
+                </div>
+</div>
+</div>
+<div class="flex items-center justify-between mb-1">
+<h2 class="font-headline-sm text-lg text-primary font-bold group-hover:text-primary-container transition-colors">
+                Computer Science Flagship Literature Set: CTCI &amp; The Pragmatic Programmer
+              </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+              The essential duo for systems architects and software engineers. Includes 189 algorithm solutions, annotated system design sheets, and principles of craftsmanship in heavy library-grade bound volumes.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-outline-variant/20 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-baseline gap-3">
+<span class="font-headline-md text-2xl text-primary font-bold font-mono">$89.99</span>
+<span class="font-label-mono-sm text-xs line-through text-on-surface-variant font-mono">$94.98</span>
+<span class="font-label-mono-sm text-xs text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+                In Stock: 55 Bundles
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary text-secondary font-label-mono-sm text-xs transition-all">
+                View Details
+              </button>
+<button class="px-4 py-1.5 rounded bg-primary-container text-surface-container-lowest hover:bg-primary-fixed-dim font-label-mono-sm text-xs font-bold transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(0,255,157,0.2)]">
+<span class="material-symbols-outlined text-[15px]" data-icon="add_shopping_cart">add_shopping_cart</span>
+                Add Both to Cart
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination & Merkle Ledger Sync Footer -->
+<div class="mt-space-md bg-surface-container-low border border-outline-variant/30 p-space-md rounded flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="font-label-mono-sm text-xs text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>PAGE 1 OF 1 • 11 OBJECTS VERIFIED VIA OWASP AIR-GAP SHA-256</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 bg-surface-container border border-outline-variant/40 text-on-surface-variant font-label-mono-sm text-xs rounded opacity-50 cursor-not-allowed">
+            PREV
+          </button>
+<button class="px-3 py-1 bg-primary-container text-surface-container-lowest font-label-mono-sm text-xs font-bold rounded">
+            1
+          </button>
+<button class="px-3 py-1 bg-surface-container border border-outline-variant/40 text-on-surface-variant font-label-mono-sm text-xs rounded opacity-50 cursor-not-allowed">
+            NEXT
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footprint / Institutional Cyber-Security Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest docked full-width bottom w-full border-t border-outline-variant/40 dark:border-outline-variant/40 mt-space-2xl">
+<div class="w-full max-w-[1440px] mx-auto px-margin py-space-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-space-lg">
+<!-- Left Column: Identity & Provenance -->
+<div class="flex flex-col gap-2 max-w-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-surface-container-high border border-primary-container/40 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="shield">shield</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary tracking-widest font-bold">SECURESHOP // ELITE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Your trusted developer &amp; engineering procurement platform with enterprise-grade cryptographic guarantees. All products strictly air-gapped and provenance-tested.
+        </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary-container font-label-mono-sm text-[10px] border border-primary-container/30">
+            OWASP-L3 VERIFIED
+          </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-mono-sm text-[10px] border border-secondary-container/30">
+            MULTI-SIG ESCROW
+          </span>
+</div>
+</div>
+<!-- Center & Right Columns: Protocol Links -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-lg w-full md:w-auto">
+<!-- Column 1: Verification -->
+<div class="flex flex-col gap-2">
+<span class="font-label-mono-sm text-xs text-primary uppercase font-bold tracking-wider">Protocol Audit</span>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">OWASP L3 Audit</a>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">Cryptographic Escrow</a>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">Dual-Custody Multisig</a>
+</div>
+<!-- Column 2: Security SLA -->
+<div class="flex flex-col gap-2">
+<span class="font-label-mono-sm text-xs text-primary uppercase font-bold tracking-wider">Infrastructure</span>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">Zero-Log SLA</a>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">PGP Master Keys</a>
+<a class="text-on-surface-variant hover:text-primary-container font-label-mono-sm text-body-sm transition-colors" href="#">Hardware Provenance</a>
+</div>
+<!-- Column 3: Authenticated Settlement -->
+<div class="flex flex-col gap-2 col-span-2 sm:col-span-1">
+<span class="font-label-mono-sm text-xs text-primary uppercase font-bold tracking-wider">Settlement</span>
+<div class="flex flex-wrap gap-1.5 mt-1">
+<span class="px-2 py-1 rounded bg-surface-container font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/30">BTC LIGHTNING</span>
+<span class="px-2 py-1 rounded bg-surface-container font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/30">USDC / SOL</span>
+<span class="px-2 py-1 rounded bg-surface-container font-label-mono-sm text-[10px] text-on-surface-variant border border-outline-variant/30">YUBIKEY SSO</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sub-Footer Copyright Ledger -->
+<div class="border-t border-outline-variant/20 py-space-sm bg-surface-container-low">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-label-mono-sm text-[11px] gap-2">
+<p>SECURESHOP ELITE // PROTOCOL OWASP-L3 VERIFIED // ALL ASSETS MERKLE CERTIFIED</p>
+<p class="text-primary-container flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+          256-BIT TLS END-TO-END CRYPTOGRAPHIC INTEGRITY
+        </p>
+</div>
+</div>
+</footer>
+<!-- Light Vanilla Script for Interactive Micro-Feedback -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Notification micro-toast for escrow cart actions
+      const cartButtons = document.querySelectorAll('button:has(.material-symbols-outlined[data-icon="add_shopping_cart"])');
+      const cartNavBtn = document.querySelector('button:has(.material-symbols-outlined[data-icon="shopping_bag"]) span:last-child');
+      let cartCount = 0;
+
+      cartButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          cartCount++;
+          if (cartNavBtn) {
+            cartNavBtn.textContent = `ESCROW CART [${cartCount}]`;
+            cartNavBtn.parentElement.classList.add('ring-1', 'ring-primary-container');
+            setTimeout(() => {
+              cartNavBtn.parentElement.classList.remove('ring-1', 'ring-primary-container');
+            }, 500);
+          }
+        });
+      });
+    });
+  </script>
+</body></html>
