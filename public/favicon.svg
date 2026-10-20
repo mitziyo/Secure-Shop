@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon: logo mark on the dark theme background -->
+  <rect width="64" height="64" rx="14" fill="#0b0e12"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#00ff9d" stroke-opacity="0.35" stroke-width="3"/>
+  <g transform="translate(5.5 5.5) scale(0.83)">
+    <path d="M32 6 51 13v17c0 12.5-7.9 21.6-19 27-11.1-5.4-19-14.5-19-27V13z"
+          fill="#00ff9d" fill-opacity="0.1" stroke="#00ff9d" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M27.5 31v-6a4.5 4.5 0 0 1 9 0v6" fill="none" stroke="#00ff9d" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M23.5 27.5h17l1.6 15.2a1.8 1.8 0 0 1-1.8 2H23.7a1.8 1.8 0 0 1-1.8-2z" fill="#00ff9d"/>
+    <circle cx="27.5" cy="31.5" r="1.5" fill="#0b0e12"/>
+    <circle cx="36.5" cy="31.5" r="1.5" fill="#0b0e12"/>
+  </g>
+</svg>
