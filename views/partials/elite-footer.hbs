@@ -1,0 +1,48 @@
+<footer class="ex-footer">
+  <div class="ex-container ex-footer__inner">
+    <div class="ex-footer__brand">
+      <div class="ex-brand">
+        <span class="ex-brand__mark"><img src="/images/logo.svg" alt="" width="18" height="18"></span>
+        <span class="ex-brand__name">SECURESHOP // ELITE</span>
+      </div>
+      <p>Your trusted developer &amp; engineering store with enterprise-grade security. Every request is validated, rate limited and CSRF protected.</p>
+      <div class="ex-footer__chips">
+        <span class="ex-chip">OWASP TOP 10 ALIGNED</span>
+        <span class="ex-chip ex-chip--cyan">BCRYPT HASHING</span>
+      </div>
+    </div>
+
+    <div class="ex-footer__cols">
+      <div class="ex-footer__col">
+        <h3>Catalog</h3>
+        <a href="/products">All Products</a>
+        <a href="/cart">Cart</a>
+        <a href="/orders">Order History</a>
+      </div>
+      <div class="ex-footer__col">
+        <h3>Account</h3>
+        {{#if user}}
+          <a href="/auth/profile">Profile</a>
+        {{else}}
+          <a href="/auth/login">Login</a>
+          <a href="/auth/register">Register</a>
+        {{/if}}
+      </div>
+      <div class="ex-footer__col">
+        <h3>Security</h3>
+        <div class="ex-footer__tags">
+          <span class="ex-chip ex-chip--muted">HELMET CSP</span>
+          <span class="ex-chip ex-chip--muted">HTTPONLY SESSIONS</span>
+          <span class="ex-chip ex-chip--muted">ACCOUNT LOCKOUT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-subfooter">
+    <div class="ex-container ex-subfooter__inner">
+      <p>&copy; 2026 SECURESHOP ELITE // BUILT WITH SECURITY IN MIND</p>
+      <p class="ok"><span class="msi">lock</span>HTTPS ENFORCED IN PRODUCTION</p>
+    </div>
+  </div>
+</footer>
