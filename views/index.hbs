@@ -11,6 +11,7 @@
 
     <main class="ex-container ex-page">
         <section class="ex-panel ex-hero">
+          <div class="ex-hero__content">
             <span class="ex-chip"><span class="ex-dot ex-dot--pulse"></span>OWASP TOP 10 ALIGNED</span>
             <h1 class="ex-hero__title">Precision gear for engineers who <em>ship secure code.</em></h1>
             <p class="ex-hero__lead">
@@ -32,6 +33,19 @@
                 <div><span class="ex-eyebrow">Sessions</span><strong>HTTPONLY</strong></div>
                 <div><span class="ex-eyebrow">Login lockout</span><strong>5 / 15 MIN</strong></div>
             </div>
+          </div>
+
+          {{! Decorative brand illustration: logo with glow, rings and orbiting security icons }}
+          <div class="ex-hero__art" aria-hidden="true">
+            <div class="ex-hero__glow"></div>
+            <div class="ex-hero__ring ex-hero__ring--outer"></div>
+            <div class="ex-hero__ring ex-hero__ring--inner"></div>
+            <img class="ex-hero__logo" src="/images/logo.svg" alt="" width="168" height="168">
+            <span class="ex-hero__orbit ex-hero__orbit--1"><span class="msi">lock</span></span>
+            <span class="ex-hero__orbit ex-hero__orbit--2"><span class="msi">shopping_bag</span></span>
+            <span class="ex-hero__orbit ex-hero__orbit--3"><span class="msi">key</span></span>
+            <span class="ex-hero__orbit ex-hero__orbit--4"><span class="msi">verified_user</span></span>
+          </div>
         </section>
 
         {{#if user}}
