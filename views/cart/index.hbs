@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrfToken}}">
+    <title>Shopping Cart - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="cart"}}
+
+    <main class="ex-container ex-page">
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Checkout step 1 of 2</span>
+                <h1 class="ex-h1">Shopping Cart <span class="ex-chip">{{itemCount}} ITEMS</span></h1>
+            </div>
+            <a class="ex-btn ex-btn--ghost" href="/products"><span class="msi">arrow_back</span>CONTINUE SHOPPING</a>
+        </div>
+
+        {{#if cartItems}}
+        <div class="ex-layout">
+            <section class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">shopping_cart</span>Reserved items</span></div>
+                <div class="ex-lines">
+                    {{#each cartItems}}
+                    <div class="ex-line">
+                        <a class="ex-line__img" href="/products/{{product_id}}">
+                            {{#if product.image_url}}
+                                <img src="{{product.image_url}}" alt="">
+                            {{else}}
+                                <span class="msi">inventory_2</span>
+                            {{/if}}
+                        </a>
+                        <div>
+                            <a class="ex-line__name" href="/products/{{product_id}}">{{product.name}}</a>
+                            <p class="ex-mono-sm ex-muted">${{formatPrice product.price}} EACH · SKU {{skuHex product_id}}</p>
+                        </div>
+                        <div class="ex-qty">
+                            <button type="button" class="update-quantity" data-product-id="{{product_id}}" data-action="decrease" aria-label="Decrease quantity"><span class="msi">remove</span></button>
+                            <input type="number" class="quantity-input" value="{{quantity}}" min="0" max="99" data-product-id="{{product_id}}" aria-label="Quantity">
+                            <button type="button" class="update-quantity" data-product-id="{{product_id}}" data-action="increase" aria-label="Increase quantity"><span class="msi">add</span></button>
+                        </div>
+                        <span class="ex-line__total">${{formatPrice (multiply product.price quantity)}}</span>
+                        <button type="button" class="ex-btn ex-btn--danger ex-btn--icon remove-item" data-product-id="{{product_id}}" title="Remove item" aria-label="Remove {{product.name}}">
+                            <span class="msi">delete</span>
+                        </button>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+
+            <aside class="ex-panel ex-sticky">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">receipt_long</span>Order summary</span></div>
+                <div class="ex-panel__body">
+                    <div class="ex-sumrow"><span>Total items</span><span>{{itemCount}}</span></div>
+                    <div class="ex-sumrow"><span>Shipping</span><span>FREE</span></div>
+                    <div class="ex-sumrow ex-sumrow--total"><span>Total</span><span>${{formatPrice total}}</span></div>
+                    <a href="/orders/checkout" class="ex-btn ex-btn--solid ex-btn--lg ex-btn--block" style="margin-top: 1rem;">
+                        <span class="msi">lock</span>PROCEED TO CHECKOUT
+                    </a>
+                    <p class="ex-secure-note"><span class="msi">security</span>STOCK IS RESERVED WHILE ITEMS ARE IN YOUR CART</p>
+                </div>
+            </aside>
+        </div>
+        {{else}}
+        <div class="ex-panel ex-empty">
+            <span class="msi">shopping_cart</span>
+            <p>YOUR CART IS EMPTY.</p>
+            <p><a href="/products">Browse the catalog</a> to get started.</p>
+        </div>
+        {{/if}}
+    </main>
+
+    {{> elite_footer}}
+
+    <script>
+        (function () {
+            async function postUpdate(productId, quantity, input) {
+                try {
+                    const response = await fetch(`/cart/${productId}/update`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'csrf-token': getCsrfToken()
+                        },
+                        body: JSON.stringify({ quantity })
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (response.ok) {
+                        // Reload so line totals, summary and stock reservations stay in sync
+                        location.reload();
+                    } else {
+                        exToast(data.message || 'Error updating cart', true);
+                        if (input) input.value = input.defaultValue;
+                    }
+                } catch (error) {
+                    exToast('Error updating cart', true);
+                    if (input) input.value = input.defaultValue;
+                }
+            }
+
+            document.querySelectorAll('.update-quantity').forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = button.dataset.productId;
+                    const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+                    let quantity = parseInt(input.value, 10) || 0;
+                    quantity = button.dataset.action === 'increase' ? quantity + 1 : Math.max(0, quantity - 1);
+                    postUpdate(productId, quantity, input);
+                });
+            });
+
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', () => {
+                    postUpdate(input.dataset.productId, parseInt(input.value, 10) || 0, input);
+                });
+            });
+
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', async () => {
+                    if (!confirm('Remove this item from cart?')) return;
+                    try {
+                        const response = await fetch(`/cart/${button.dataset.productId}/remove`, {
+                            method: 'POST',
+                            headers: { 'Accept': 'application/json', 'csrf-token': getCsrfToken() }
+                        });
+                        const data = await response.json().catch(() => ({}));
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            exToast(data.message || 'Error removing item', true);
+                        }
+                    } catch (error) {
+                        exToast('Error removing item', true);
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

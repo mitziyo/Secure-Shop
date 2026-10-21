@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="orders"}}
+
+    <main class="ex-container ex-page">
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Order history</span>
+                <h1 class="ex-h1">My Orders</h1>
+            </div>
+            <a class="ex-btn ex-btn--ghost" href="/products"><span class="msi">grid_view</span>CONTINUE SHOPPING</a>
+        </div>
+
+        {{#if orders}}
+        <div class="ex-stack">
+            {{#each orders}}
+            <a class="ex-panel ex-order-row" href="/orders/{{id}}">
+                <span class="ex-order-row__id">ORDER #{{id}}</span>
+                <span><span class="ex-status ex-status--{{status}}">{{status}}</span></span>
+                <span class="ex-mono-sm ex-muted">{{formatDate created_at}} · {{orderItems.length}} line item(s)</span>
+                <span class="ex-line__total">${{formatPrice total_amount}}</span>
+                <span class="ex-btn ex-btn--ghost ex-btn--sm">DETAILS</span>
+            </a>
+            {{/each}}
+        </div>
+
+        <div class="ex-panel ex-pager">
+            <div class="ex-pager__status"><span class="ex-dot"></span><span>PAGE {{currentPage}}</span></div>
+            <nav class="ex-pager__nav" aria-label="Order pagination">
+                {{#if (gt currentPage 1)}}
+                    <a class="ex-pagebtn" href="/orders?page={{subtract currentPage 1}}">PREV</a>
+                {{else}}
+                    <span class="ex-pagebtn is-disabled" aria-disabled="true">PREV</span>
+                {{/if}}
+                <span class="ex-pagebtn is-current" aria-current="page">{{currentPage}}</span>
+                {{#if (eq orders.length 10)}}
+                    <a class="ex-pagebtn" href="/orders?page={{add currentPage 1}}">NEXT</a>
+                {{else}}
+                    <span class="ex-pagebtn is-disabled" aria-disabled="true">NEXT</span>
+                {{/if}}
+            </nav>
+        </div>
+        {{else}}
+        <div class="ex-panel ex-empty">
+            <span class="msi">receipt_long</span>
+            <p>NO ORDERS YET.</p>
+            <p>Your order history will appear here once you make a purchase. <a href="/products">Start shopping</a></p>
+        </div>
+        {{/if}}
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

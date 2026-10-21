@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order #{{order.id}} - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="orders"}}
+
+    <main class="ex-container ex-page">
+        <nav class="ex-breadcrumb" aria-label="Breadcrumb">
+            <a href="/orders">Orders</a>
+            <span class="sep">/</span>
+            <span aria-current="page">Order #{{order.id}}</span>
+        </nav>
+
+        <div class="ex-page-head">
+            <h1 class="ex-h1">Order #{{order.id}} <span class="ex-status ex-status--{{order.status}}">{{order.status}}</span></h1>
+            <div class="ex-actions-row">
+                <a href="/orders" class="ex-btn ex-btn--ghost"><span class="msi">arrow_back</span>BACK TO ORDERS</a>
+                <a href="/products" class="ex-btn ex-btn--emerald"><span class="msi">grid_view</span>CONTINUE SHOPPING</a>
+            </div>
+        </div>
+
+        <div class="ex-layout">
+            <section class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">list_alt</span>Order items</span></div>
+                <div class="ex-lines">
+                    {{#each order.orderItems}}
+                    <div class="ex-line ex-line--compact">
+                        <div>
+                            <a class="ex-line__name" href="/products/{{product_id}}">{{#if product.name}}{{product.name}}{{else}}Product #{{product_id}}{{/if}}</a>
+                            <p class="ex-mono-sm ex-muted">${{formatPrice price}} EACH</p>
+                        </div>
+                        <span class="ex-mono-sm">QTY {{quantity}}</span>
+                        <span class="ex-line__total">${{formatPrice (multiply price quantity)}}</span>
+                    </div>
+                    {{else}}
+                    <p class="ex-empty">NO ITEMS RECORDED FOR THIS ORDER.</p>
+                    {{/each}}
+                </div>
+            </section>
+
+            <aside class="ex-stack">
+                <section class="ex-panel">
+                    <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">receipt_long</span>Order details</span></div>
+                    <div class="ex-panel__body">
+                        <dl class="ex-specs">
+                            <dt>Date</dt><dd>{{formatDate order.created_at}}</dd>
+                            <dt>Payment</dt><dd>{{order.payment_method}}</dd>
+                            <dt>Status</dt><dd><span class="ex-status ex-status--{{order.status}}">{{order.status}}</span></dd>
+                        </dl>
+                        <div class="ex-sumrow ex-sumrow--total"><span>Total</span><span>${{formatPrice order.total_amount}}</span></div>
+                    </div>
+                </section>
+                <section class="ex-panel">
+                    <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">local_shipping</span>Shipping address</span></div>
+                    <div class="ex-panel__body"><p style="white-space: pre-line;">{{order.shipping_address}}</p></div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="cart"}}
+
+    <main class="ex-container ex-page">
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Checkout step 2 of 2</span>
+                <h1 class="ex-h1">Checkout</h1>
+            </div>
+            <a class="ex-btn ex-btn--ghost" href="/cart"><span class="msi">arrow_back</span>BACK TO CART</a>
+        </div>
+
+        {{> elite_errors}}
+
+        <form class="ex-layout" id="checkout-form" action="/orders/checkout" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+            <section class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">local_shipping</span>Shipping &amp; payment</span></div>
+                <div class="ex-panel__body ex-form">
+                    <div class="ex-field">
+                        <label class="ex-label" for="shipping_address">Shipping address</label>
+                        <textarea class="ex-input" id="shipping_address" name="shipping_address" rows="4" required minlength="10" maxlength="500"
+                                  placeholder="Street, city, postal code and country"></textarea>
+                        <span class="ex-help">Complete address details, at least 10 characters.</span>
+                    </div>
+                    <div class="ex-field">
+                        <label class="ex-label" for="payment_method">Payment method</label>
+                        <div class="ex-select-wrap">
+                            <select class="ex-select" id="payment_method" name="payment_method" required>
+                                <option value="">Select payment method</option>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="debit_card">Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="bank_transfer">Bank Transfer</option>
+                            </select>
+                            <span class="msi">arrow_drop_down</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="ex-panel ex-sticky">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">receipt_long</span>Order summary</span></div>
+                <div class="ex-panel__body">
+                    {{#each cartItems}}
+                    <div class="ex-sumrow"><span>{{product.name}} ×{{quantity}}</span><span>${{formatPrice (multiply quantity product.price)}}</span></div>
+                    {{/each}}
+                    <div class="ex-sumrow ex-sumrow--total"><span>Total</span><span>${{formatPrice total}}</span></div>
+                    <button type="submit" class="ex-btn ex-btn--solid ex-btn--lg ex-btn--block" style="margin-top: 1rem;">
+                        <span class="msi">payments</span>PLACE ORDER
+                    </button>
+                    <p class="ex-secure-note"><span class="msi">lock</span>FORM PROTECTED BY CSRF TOKEN</p>
+                </div>
+            </aside>
+        </form>
+    </main>
+
+    {{> elite_footer}}
+
+    <script>
+        // Prevent double submission
+        document.getElementById('checkout-form').addEventListener('submit', function (e) {
+            if (!this.checkValidity()) return;
+            const button = this.querySelector('button[type="submit"]');
+            setTimeout(() => { button.disabled = true; }, 0);
+        });
+    </script>
+</body>
+</html>
