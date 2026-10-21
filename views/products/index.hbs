@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrfToken}}">
+    <title>Products Catalog - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="catalog"}}
+
+    <main class="ex-container ex-main">
+        <!-- Category & filter sidebar -->
+        <aside class="ex-panel ex-sidebar" aria-label="Catalog filters">
+            <div class="ex-sidebar__head">
+                <div class="ex-sidebar__title-row">
+                    <span class="ex-sidebar__title">TAXONOMY MATRIX</span>
+                    <span class="ex-chip">{{categories.length}} MODULES</span>
+                </div>
+                <p class="ex-eyebrow">IN-STOCK INVENTORY ONLY</p>
+            </div>
+
+            <nav class="ex-section" aria-label="Categories">
+                <span class="ex-eyebrow">Inventory Modules</span>
+                <a class="ex-cat {{#unless currentCategory}}is-active{{/unless}}"
+                   href="/products{{#unless (eq sort "newest")}}?sort={{sort}}{{/unless}}">
+                    <span class="ex-cat__label"><span class="msi">grid_view</span><span>All Products</span></span>
+                    <span class="ex-cat__count mono">{{totalProducts}}</span>
+                </a>
+                {{#each categories}}
+                <a class="ex-cat {{#if (eq name ../currentCategory)}}is-active{{/if}}"
+                   href="/products?category={{urlEncode name}}{{#unless (eq ../sort "newest")}}&sort={{../sort}}{{/unless}}">
+                    <span class="ex-cat__label"><span class="msi">{{categoryIcon name}}</span><span>{{name}}</span></span>
+                    <span class="ex-cat__count mono">{{count}}</span>
+                </a>
+                {{/each}}
+            </nav>
+
+            <form class="ex-section ex-section--ruled" action="/products" method="GET">
+                {{#if currentCategory}}<input type="hidden" name="category" value="{{currentCategory}}">{{/if}}
+                {{#if searchQuery}}<input type="hidden" name="q" value="{{searchQuery}}">{{/if}}
+                <input type="hidden" name="sort" value="{{sort}}">
+
+                <div class="ex-range-head">
+                    <label class="ex-eyebrow" for="max-price">Price Ceiling</label>
+                    <span class="ex-range-value">$0 — $<span id="max-price-value">{{maxPrice}}</span></span>
+                </div>
+                <input class="ex-range" id="max-price" type="range" name="max_price"
+                       min="1" max="{{priceCeiling}}" step="1" value="{{maxPrice}}">
+
+                <button type="submit" class="ex-btn ex-btn--emerald ex-btn--block">
+                    <span class="msi">tune</span><span>APPLY FILTERS</span>
+                </button>
+            </form>
+
+            <div class="ex-sidebar__ledger">
+                <div class="ex-ledger-row"><span class="msi">security</span><span>Input validation: ENFORCED</span></div>
+                <div class="ex-ledger-row"><span class="msi cyan">key</span><span>Passwords: BCRYPT HASHED</span></div>
+            </div>
+        </aside>
+
+        <!-- Catalog -->
+        <section class="ex-stage">
+            <div class="ex-panel ex-strip">
+                <div>
+                    <div class="ex-strip__title-row">
+                        <h1>{{#if currentCategory}}{{currentCategory}}{{else}}Products Catalog{{/if}}</h1>
+                        <span class="ex-chip ex-strip__count">{{categoryTotal}} ITEMS IN STOCK</span>
+                    </div>
+                    <p class="ex-strip__sub">
+                        {{#if searchQuery}}
+                            Results for “{{searchQuery}}” — {{products.length}} match{{#unless (eq products.length 1)}}es{{/unless}} on this page.
+                        {{else}}
+                            Showing {{products.length}} items on page {{currentPage}}, with live stock levels.
+                        {{/if}}
+                    </p>
+                </div>
+
+                <div class="ex-strip__controls">
+                    {{#if (eq user.role "admin")}}
+                    <a class="ex-btn ex-btn--emerald" href="/products/admin/new">+ ADD PRODUCT</a>
+                    {{/if}}
+                    <form action="/products" method="GET" id="sort-form">
+                        {{#if currentCategory}}<input type="hidden" name="category" value="{{currentCategory}}">{{/if}}
+                        {{#if searchQuery}}<input type="hidden" name="q" value="{{searchQuery}}">{{/if}}
+                        <input type="hidden" name="max_price" value="{{maxPrice}}">
+                        <div class="ex-select-wrap">
+                            <label class="sr-only" for="sort">Sort products</label>
+                            <select class="ex-select" id="sort" name="sort">
+                                <option value="newest" {{#if (eq sort "newest")}}selected{{/if}}>SORT: NEWEST ALLOCATION</option>
+                                <option value="price_asc" {{#if (eq sort "price_asc")}}selected{{/if}}>SORT: PRICE (LOW TO HIGH)</option>
+                                <option value="price_desc" {{#if (eq sort "price_desc")}}selected{{/if}}>SORT: PRICE (HIGH TO LOW)</option>
+                                <option value="stock" {{#if (eq sort "stock")}}selected{{/if}}>SORT: STOCK DEPTH</option>
+                            </select>
+                            <span class="msi">arrow_drop_down</span>
+                        </div>
+                        <noscript><button type="submit" class="ex-btn ex-btn--ghost">SORT</button></noscript>
+                    </form>
+                    <div class="ex-toggle" role="group" aria-label="Layout">
+                        <button type="button" class="is-active" data-view="grid" title="Grid view" aria-pressed="true"><span class="msi">grid_view</span></button>
+                        <button type="button" data-view="list" title="List view" aria-pressed="false"><span class="msi">view_list</span></button>
+                    </div>
+                </div>
+            </div>
+
+            {{#if (gt products.length 0)}}
+            <div class="ex-grid" id="product-grid">
+                {{#each products}}
+                <article class="ex-card">
+                    <span class="ex-chip ex-card__badge {{#if (eq category "Books")}}ex-chip--cyan{{/if}}">{{category}}</span>
+                    <a class="ex-card__media" href="/products/{{id}}" tabindex="-1" aria-hidden="true">
+                        {{#if image_url}}
+                            <img src="{{image_url}}" alt="" loading="lazy">
+                        {{else}}
+                            <span class="msi ex-card__noimg">inventory_2</span>
+                        {{/if}}
+                        <span class="ex-card__sku">SKU: {{skuHex id}}</span>
+                    </a>
+                    <div class="ex-card__body">
+                        <h2 class="ex-card__title"><a href="/products/{{id}}">{{name}}</a></h2>
+                        <p class="ex-card__desc">{{description}}</p>
+                    </div>
+                    <div class="ex-card__foot">
+                        <div class="ex-card__meta">
+                            <span class="ex-price">${{formatPrice price}}</span>
+                            <span class="ex-stock {{#if (lt stock_quantity 20)}}is-low{{/if}}">
+                                <span class="ex-dot"></span>Stock: <span class="js-stock">{{stock_quantity}}</span> units
+                            </span>
+                        </div>
+                        <div class="ex-card__actions">
+                            <a class="ex-btn ex-btn--ghost" href="/products/{{id}}">View Details</a>
+                            {{#if ../user}}
+                            <button type="button" class="ex-btn ex-btn--solid add-to-cart" data-product-id="{{id}}">
+                                <span class="msi">add_shopping_cart</span>Add to Cart
+                            </button>
+                            {{else}}
+                            <a class="ex-btn ex-btn--solid" href="/auth/login"><span class="msi">login</span>Login to Buy</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </article>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="ex-panel ex-empty">
+                <span class="msi">inventory_2</span>
+                <p>NO MATCHING ITEMS IN STOCK.</p>
+                <p><a href="/products">Reset all filters</a></p>
+            </div>
+            {{/if}}
+
+            <div class="ex-panel ex-pager">
+                <div class="ex-pager__status">
+                    <span class="ex-dot"></span>
+                    <span>PAGE {{currentPage}} • {{products.length}} ITEMS • STOCK VERIFIED IN REAL TIME</span>
+                </div>
+                <nav class="ex-pager__nav" aria-label="Product pagination">
+                    {{#if (gt currentPage 1)}}
+                        <a class="ex-pagebtn" href="/products?{{pageQuery}}page={{subtract currentPage 1}}">PREV</a>
+                    {{else}}
+                        <span class="ex-pagebtn is-disabled" aria-disabled="true">PREV</span>
+                    {{/if}}
+                    <span class="ex-pagebtn is-current" aria-current="page">{{currentPage}}</span>
+                    {{#if hasNextPage}}
+                        <a class="ex-pagebtn" href="/products?{{pageQuery}}page={{add currentPage 1}}">NEXT</a>
+                    {{else}}
+                        <span class="ex-pagebtn is-disabled" aria-disabled="true">NEXT</span>
+                    {{/if}}
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    {{> elite_footer}}
+
+    <script>
+        (function () {
+            // getCsrfToken, exToast and updateCartCount come from /js/elite.js
+            // Add to cart
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const productId = button.dataset.productId;
+                    button.disabled = true;
+                    try {
+                        const response = await fetch('/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'csrf-token': getCsrfToken()
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify({ product_id: productId, quantity: 1 })
+                        });
+                        const data = await response.json().catch(() => ({}));
+                        if (response.ok) {
+                            updateCartCount(data.itemCount);
+                            // Adding to cart reserves stock server-side
+                            const stock = button.closest('.ex-card').querySelector('.js-stock');
+                            if (stock) stock.textContent = Math.max(parseInt(stock.textContent, 10) - 1, 0);
+                            exToast('Item added to cart');
+                        } else {
+                            exToast(data.message || 'Error adding to cart', true);
+                        }
+                    } catch (error) {
+                        exToast('Error adding to cart', true);
+                    } finally {
+                        button.disabled = false;
+                    }
+                });
+            });
+
+            // Sort: submit on change
+            const sortSelect = document.getElementById('sort');
+            sortSelect?.addEventListener('change', () => sortSelect.form.submit());
+
+            // Price ceiling label
+            const range = document.getElementById('max-price');
+            const rangeValue = document.getElementById('max-price-value');
+            range?.addEventListener('input', () => { rangeValue.textContent = range.value; });
+
+            // Grid / list view toggle (remembered per browser)
+            const grid = document.getElementById('product-grid');
+            const viewButtons = document.querySelectorAll('[data-view]');
+            function setView(view) {
+                grid?.classList.toggle('ex-grid--list', view === 'list');
+                viewButtons.forEach(btn => {
+                    const active = btn.dataset.view === view;
+                    btn.classList.toggle('is-active', active);
+                    btn.setAttribute('aria-pressed', String(active));
+                });
+            }
+            viewButtons.forEach(btn => btn.addEventListener('click', () => {
+                setView(btn.dataset.view);
+                try { localStorage.setItem('catalogView', btn.dataset.view); } catch (e) {}
+            }));
+            try { if (localStorage.getItem('catalogView') === 'list') setView('list'); } catch (e) {}
+        })();
+    </script>
+</body>
+</html>
