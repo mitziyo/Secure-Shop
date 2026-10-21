@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header}}
+
+    <main class="ex-container ex-page">
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Account</span>
+                <h1 class="ex-h1">My Profile</h1>
+            </div>
+        </div>
+
+        <div class="ex-layout">
+            <section class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">person</span>Profile details</span></div>
+                <div class="ex-panel__body">
+                    <form class="ex-form" action="/auth/profile" method="POST">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        {{#if success}}
+                        <div class="ex-alert ex-alert--success" role="status"><span class="msi">check_circle</span><span>{{success}}</span></div>
+                        {{/if}}
+                        {{> elite_errors}}
+
+                        <div class="ex-field">
+                            <label class="ex-label" for="username">Username</label>
+                            <input class="ex-input" type="text" id="username" name="username" value="{{user.username}}" required minlength="3" maxlength="50">
+                        </div>
+                        <div class="ex-field">
+                            <label class="ex-label" for="email">Email address</label>
+                            <input class="ex-input" type="email" id="email" value="{{user.email}}" disabled>
+                            <span class="ex-help">Email can't be changed.</span>
+                        </div>
+                        <div class="ex-form-actions">
+                            <button type="submit" class="ex-btn ex-btn--solid"><span class="msi">check_circle</span>UPDATE PROFILE</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <aside class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">verified_user</span>Account information</span></div>
+                <div class="ex-panel__body">
+                    <dl class="ex-specs">
+                        <dt>Role</dt>
+                        <dd><span class="ex-status {{#if (eq user.role "admin")}}ex-status--danger{{else}}ex-status--ok{{/if}}">{{user.role}}</span></dd>
+                        <dt>Email</dt>
+                        <dd>{{user.email}}</dd>
+                        {{#if user.created_at}}
+                        <dt>Member since</dt>
+                        <dd>{{formatDate user.created_at}}</dd>
+                        {{/if}}
+                    </dl>
+                    <p class="ex-secure-note"><span class="msi">lock</span>SESSION COOKIE IS HTTPONLY</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header}}
+
+    <main class="ex-container ex-page ex-auth">
+        <div class="ex-panel ex-panel--glass ex-auth__card">
+            <div class="ex-auth__icon"><span class="msi">person_add</span></div>
+            <h1 class="ex-auth__title">Create your account</h1>
+            <p class="ex-auth__sub">Your password is hashed with bcrypt before it is stored.</p>
+
+            <form class="ex-form" action="/auth/register" method="POST">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                {{> elite_errors}}
+
+                <div class="ex-field">
+                    <label class="ex-label" for="username">Username</label>
+                    <input class="ex-input" type="text" id="username" name="username" autocomplete="username" required minlength="3" maxlength="50">
+                    <span class="ex-help">3–50 characters: letters, numbers and underscores only.</span>
+                </div>
+                <div class="ex-field">
+                    <label class="ex-label" for="email">Email address</label>
+                    <input class="ex-input" type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="ex-field">
+                    <label class="ex-label" for="password">Password</label>
+                    <input class="ex-input" type="password" id="password" name="password" autocomplete="new-password" required>
+                </div>
+                <button type="submit" class="ex-btn ex-btn--solid ex-btn--lg ex-btn--block"><span class="msi">person_add</span>CREATE ACCOUNT</button>
+            </form>
+
+            <p class="ex-auth__foot">Already have an account? <a href="/auth/login">Login here</a></p>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

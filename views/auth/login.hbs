@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header}}
+
+    <main class="ex-container ex-page ex-auth">
+        <div class="ex-panel ex-panel--glass ex-auth__card">
+            <div class="ex-auth__icon"><span class="msi">lock</span></div>
+            <h1 class="ex-auth__title">Login to your account</h1>
+            <p class="ex-auth__sub">Authenticate to access your cart, orders and profile.</p>
+
+            <form class="ex-form" action="/auth/login" method="POST">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                {{> elite_errors}}
+
+                <div class="ex-field">
+                    <label class="ex-label" for="email">Email address</label>
+                    <input class="ex-input" type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="ex-field">
+                    <label class="ex-label" for="password">Password</label>
+                    <input class="ex-input" type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="ex-btn ex-btn--solid ex-btn--lg ex-btn--block"><span class="msi">login</span>LOGIN</button>
+                <p class="ex-secure-note"><span class="msi">security</span>5 FAILED ATTEMPTS LOCK THE ACCOUNT FOR 15 MINUTES</p>
+            </form>
+
+            <p class="ex-auth__foot">Don't have an account? <a href="/auth/register">Register here</a></p>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

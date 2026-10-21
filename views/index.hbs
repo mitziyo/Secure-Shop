@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureShop Elite - Developer &amp; Engineering Store</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="home"}}
+
+    <main class="ex-container ex-page">
+        <section class="ex-panel ex-hero">
+            <span class="ex-chip"><span class="ex-dot ex-dot--pulse"></span>OWASP TOP 10 ALIGNED</span>
+            <h1 class="ex-hero__title">Precision gear for engineers who <em>ship secure code.</em></h1>
+            <p class="ex-hero__lead">
+                Workstation hardware, developer apparel and the books that shaped the craft, sold
+                through a store built with security first: hashed credentials, CSRF tokens and rate limiting on every request.
+            </p>
+            <div class="ex-actions-row">
+                {{#if user}}
+                    <a class="ex-btn ex-btn--solid ex-btn--lg" href="/products"><span class="msi">grid_view</span>BROWSE CATALOG</a>
+                    <a class="ex-btn ex-btn--cyan ex-btn--lg" href="/orders"><span class="msi">receipt_long</span>MY ORDERS</a>
+                {{else}}
+                    <a class="ex-btn ex-btn--solid ex-btn--lg" href="/auth/register"><span class="msi">person_add</span>CREATE ACCOUNT</a>
+                    <a class="ex-btn ex-btn--emerald ex-btn--lg" href="/auth/login"><span class="msi">login</span>LOGIN</a>
+                    <a class="ex-btn ex-btn--cyan ex-btn--lg" href="/products"><span class="msi">grid_view</span>BROWSE CATALOG</a>
+                {{/if}}
+            </div>
+            <div class="ex-hero__meta">
+                <div><span class="ex-eyebrow">Passwords</span><strong>BCRYPT</strong></div>
+                <div><span class="ex-eyebrow">Sessions</span><strong>HTTPONLY</strong></div>
+                <div><span class="ex-eyebrow">Login lockout</span><strong>5 / 15 MIN</strong></div>
+            </div>
+        </section>
+
+        {{#if user}}
+        <h2 class="ex-section-title">Your console</h2>
+        <div class="ex-tiles">
+            <a class="ex-panel ex-tile" href="/cart">
+                <span class="msi">shopping_cart</span>
+                <strong>Cart</strong>
+                <span>{{itemCount}} item(s) reserved for you</span>
+            </a>
+            <a class="ex-panel ex-tile" href="/orders">
+                <span class="msi">receipt_long</span>
+                <strong>Orders</strong>
+                <span>Track your order history</span>
+            </a>
+            <a class="ex-panel ex-tile" href="/auth/profile">
+                <span class="msi">person</span>
+                <strong>Profile</strong>
+                <span>Manage your account settings</span>
+            </a>
+            {{#if (eq user.role "admin")}}
+            <a class="ex-panel ex-tile ex-tile--admin" href="/admin">
+                <span class="msi">admin_panel_settings</span>
+                <strong>Admin Console</strong>
+                <span>Manage products, orders and users</span>
+            </a>
+            {{/if}}
+        </div>
+        {{/if}}
+
+        <h2 class="ex-section-title">Why SecureShop</h2>
+        <div class="ex-features">
+            <div class="ex-panel ex-feature">
+                <span class="msi">shield</span>
+                <h3>Secure by design</h3>
+                <p>Built on OWASP guidance: Helmet security headers, CSP, CSRF tokens and server-side validation on every form.</p>
+            </div>
+            <div class="ex-panel ex-feature">
+                <span class="msi">key</span>
+                <h3>Protected accounts</h3>
+                <p>Passwords are hashed with bcrypt, sessions use httpOnly cookies, and repeated failed logins lock the account.</p>
+            </div>
+            <div class="ex-panel ex-feature">
+                <span class="msi">local_shipping</span>
+                <h3>Live inventory</h3>
+                <p>Stock is reserved the moment an item enters your cart, so checkout never oversells.</p>
+            </div>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

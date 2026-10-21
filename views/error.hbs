@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header}}
+
+    <main class="ex-container ex-page ex-error">
+        <div class="ex-panel ex-error__card">
+            <span class="msi ex-error__icon">warning</span>
+            <p class="ex-error__code">ERR // REQUEST REJECTED</p>
+            <h1 class="ex-error__title">Something went wrong</h1>
+            <p class="ex-error__msg">{{message}}</p>
+            <div class="ex-actions-row">
+                <a href="/" class="ex-btn ex-btn--emerald"><span class="msi">home</span>GO HOME</a>
+                <a href="/products" class="ex-btn ex-btn--cyan"><span class="msi">grid_view</span>CATALOG</a>
+            </div>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>
