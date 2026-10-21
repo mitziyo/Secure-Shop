@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit {{product.name}} - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="products"}}
+
+        <nav class="ex-breadcrumb" aria-label="Breadcrumb">
+            <a href="/products/admin">Products</a>
+            <span class="sep">/</span>
+            <span aria-current="page">{{product.name}}</span>
+        </nav>
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">SKU {{skuHex product.id}}</span>
+                <h1 class="ex-h1">Edit Product</h1>
+            </div>
+            <a href="/products/{{product.id}}" class="ex-btn ex-btn--ghost">VIEW IN STORE</a>
+        </div>
+
+        <div class="ex-layout">
+            <section class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">edit</span>Product details</span></div>
+                <div class="ex-panel__body">
+                    {{> elite_product_form action=(concat "/products/admin/" product.id) submitLabel="UPDATE PRODUCT"}}
+                </div>
+            </section>
+
+            <aside class="ex-stack">
+                <section class="ex-panel">
+                    <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">grid_view</span>Preview</span></div>
+                    <div class="ex-panel__body">
+                        <div class="ex-card__media">
+                            {{#if product.image_url}}
+                                <img src="{{product.image_url}}" alt="">
+                            {{else}}
+                                <span class="msi ex-card__noimg">inventory_2</span>
+                            {{/if}}
+                        </div>
+                    </div>
+                </section>
+                <section class="ex-panel" style="border-color: rgba(255, 51, 102, 0.35);">
+                    <div class="ex-panel__head"><span class="ex-panel__title" style="color: var(--hazard);"><span class="msi" style="color: var(--hazard);">warning</span>Danger zone</span></div>
+                    <div class="ex-panel__body">
+                        <p class="ex-muted" style="margin-bottom: 12px;">Deleting a product can't be undone.</p>
+                        <form method="POST" action="/products/admin/{{product.id}}/delete" data-confirm="Are you sure you want to delete this product? This action cannot be undone.">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                            <button type="submit" class="ex-btn ex-btn--danger ex-btn--block"><span class="msi">delete</span>DELETE PRODUCT</button>
+                        </form>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

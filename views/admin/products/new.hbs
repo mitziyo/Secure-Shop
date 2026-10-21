@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="products"}}
+
+        <nav class="ex-breadcrumb" aria-label="Breadcrumb">
+            <a href="/products/admin">Products</a>
+            <span class="sep">/</span>
+            <span aria-current="page">New</span>
+        </nav>
+
+        <div class="ex-page-head">
+            <h1 class="ex-h1">Add New Product</h1>
+        </div>
+
+        <section class="ex-panel" style="max-width: 48rem;">
+            <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">inventory_2</span>Product details</span></div>
+            <div class="ex-panel__body">
+                {{> elite_product_form action="/products/admin" submitLabel="CREATE PRODUCT"}}
+            </div>
+        </section>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrfToken}}">
+    <title>Manage Users - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="users"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Access control</span>
+                <h1 class="ex-h1">Manage Users <span class="ex-chip">{{users.length}} ACCOUNTS</span></h1>
+            </div>
+        </div>
+
+        <section class="ex-panel">
+            {{#if users}}
+            <div class="ex-table-wrap">
+                <table class="ex-table">
+                    <thead>
+                        <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th class="ex-right">Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td class="mono ex-muted">#{{id}}</td>
+                            <td class="ex-strong">{{username}}</td>
+                            <td class="mono">{{email}}</td>
+                            <td><span class="ex-status {{#if (eq role "admin")}}ex-status--danger{{else}}ex-status--ok{{/if}}">{{role}}</span></td>
+                            <td class="mono ex-muted">{{formatDate created_at}}</td>
+                            <td>
+                                <div class="ex-table__actions">
+                                    <button type="button" class="ex-btn ex-btn--cyan ex-btn--sm edit-role-btn"
+                                            data-user-id="{{id}}" data-user-role="{{role}}" data-username="{{username}}">
+                                        <span class="msi">key</span>EDIT ROLE
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p class="ex-empty">NO USERS FOUND.</p>
+            {{/if}}
+        </section>
+    </main>
+
+    {{> elite_footer}}
+
+    <dialog class="ex-modal" id="editRoleModal" aria-labelledby="editRoleTitle">
+        <form method="dialog" id="editRoleForm">
+            <div class="ex-panel__head">
+                <span class="ex-panel__title" id="editRoleTitle"><span class="msi">key</span>Edit role: <span id="editRoleUser"></span></span>
+                <button type="submit" value="cancel" class="ex-btn ex-btn--ghost ex-btn--icon" aria-label="Close"><span class="msi">close</span></button>
+            </div>
+            <div class="ex-modal__body">
+                <label class="ex-radio">
+                    <input type="radio" name="role" value="customer" id="roleCustomer">
+                    <span><strong>CUSTOMER</strong><small>Can shop, manage their cart and view their own orders.</small></span>
+                </label>
+                <label class="ex-radio">
+                    <input type="radio" name="role" value="admin" id="roleAdmin">
+                    <span><strong>ADMIN</strong><small>Full access to products, orders, users and logs.</small></span>
+                </label>
+            </div>
+            <div class="ex-modal__foot">
+                <button type="submit" value="cancel" class="ex-btn ex-btn--ghost">CANCEL</button>
+                <button type="button" class="ex-btn ex-btn--solid" id="saveRoleBtn"><span class="msi">check_circle</span>SAVE ROLE</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        (function () {
+            const modal = document.getElementById('editRoleModal');
+            const saveButton = document.getElementById('saveRoleBtn');
+            let currentUserId = null;
+
+            document.querySelectorAll('.edit-role-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    currentUserId = button.dataset.userId;
+                    document.getElementById('editRoleUser').textContent = button.dataset.username;
+                    document.getElementById('roleCustomer').checked = button.dataset.userRole === 'customer';
+                    document.getElementById('roleAdmin').checked = button.dataset.userRole === 'admin';
+                    modal.showModal();
+                });
+            });
+
+            saveButton.addEventListener('click', async () => {
+                const selectedRole = document.querySelector('#editRoleForm input[name="role"]:checked')?.value;
+                if (!selectedRole) {
+                    exToast('Please select a role', true);
+                    return;
+                }
+                saveButton.disabled = true;
+                try {
+                    const response = await fetch(`/admin/users/${currentUserId}/role`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'x-csrf-token': getCsrfToken()
+                        },
+                        body: JSON.stringify({ role: selectedRole })
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (response.ok) {
+                        modal.close();
+                        exToast('User role updated');
+                        setTimeout(() => location.reload(), 700);
+                    } else {
+                        exToast('Error updating role: ' + (data.message || 'Unknown error'), true);
+                    }
+                } catch (error) {
+                    exToast('Error updating role', true);
+                } finally {
+                    saveButton.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="products"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Inventory</span>
+                <h1 class="ex-h1">Manage Products <span class="ex-chip">{{products.length}} SKUS</span></h1>
+            </div>
+            <a href="/products/admin/new" class="ex-btn ex-btn--solid"><span class="msi">add</span>ADD PRODUCT</a>
+        </div>
+
+        <section class="ex-panel">
+            {{#if products}}
+            <div class="ex-table-wrap">
+                <table class="ex-table">
+                    <thead>
+                        <tr><th>SKU</th><th>Product</th><th>Category</th><th class="ex-right">Price</th><th>Stock</th><th class="ex-right">Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td class="mono ex-muted">{{skuHex id}}</td>
+                            <td><a class="ex-strong" href="/products/{{id}}">{{name}}</a></td>
+                            <td><span class="ex-chip {{#if (eq category "Books")}}ex-chip--cyan{{/if}}">{{category}}</span></td>
+                            <td class="mono ex-strong ex-right">${{formatPrice price}}</td>
+                            <td>
+                                {{#if (gt stock_quantity 10)}}
+                                    <span class="ex-status ex-status--ok">{{stock_quantity}}</span>
+                                {{else if (gt stock_quantity 0)}}
+                                    <span class="ex-status ex-status--pending">{{stock_quantity}} LOW</span>
+                                {{else}}
+                                    <span class="ex-status ex-status--danger">OUT</span>
+                                {{/if}}
+                            </td>
+                            <td>
+                                <div class="ex-table__actions">
+                                    <a href="/products/admin/{{id}}/edit" class="ex-btn ex-btn--cyan ex-btn--sm"><span class="msi">edit</span>EDIT</a>
+                                    <form method="POST" action="/products/admin/{{id}}/delete" data-confirm="Are you sure you want to delete this product?">
+                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                        <button type="submit" class="ex-btn ex-btn--danger ex-btn--sm"><span class="msi">delete</span>DELETE</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <div class="ex-empty">
+                <span class="msi">inventory_2</span>
+                <p>NO PRODUCTS FOUND.</p>
+                <p><a href="/products/admin/new">Add your first product</a></p>
+            </div>
+            {{/if}}
+        </section>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

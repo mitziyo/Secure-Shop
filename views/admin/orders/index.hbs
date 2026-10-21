@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrfToken}}">
+    <title>Manage Orders - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="orders"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Fulfilment</span>
+                <h1 class="ex-h1">Manage Orders</h1>
+            </div>
+        </div>
+
+        <section class="ex-panel">
+            {{#if orders}}
+            <div class="ex-table-wrap">
+                <table class="ex-table">
+                    <thead>
+                        <tr><th>Order</th><th>Customer</th><th>Date</th><th class="ex-right">Total</th><th>Status</th><th class="ex-right">Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                        <tr>
+                            <td class="mono ex-strong">#{{id}}</td>
+                            <td>
+                                <div class="ex-strong">{{#if user.username}}{{user.username}}{{else}}—{{/if}}</div>
+                                <div class="ex-mono-sm ex-muted">{{user.email}}</div>
+                            </td>
+                            <td class="mono ex-muted">{{formatDate created_at}}</td>
+                            <td class="mono ex-strong ex-right">${{formatPrice total_amount}}</td>
+                            <td>
+                                <div class="ex-select-wrap">
+                                    <label class="sr-only" for="status-{{id}}">Status for order {{id}}</label>
+                                    <select class="ex-select status-select" id="status-{{id}}" data-order-id="{{id}}" data-current="{{status}}">
+                                        <option value="pending" {{#if (eq status "pending")}}selected{{/if}}>PENDING</option>
+                                        <option value="processing" {{#if (eq status "processing")}}selected{{/if}}>PROCESSING</option>
+                                        <option value="shipped" {{#if (eq status "shipped")}}selected{{/if}}>SHIPPED</option>
+                                        <option value="delivered" {{#if (eq status "delivered")}}selected{{/if}}>DELIVERED</option>
+                                        <option value="cancelled" {{#if (eq status "cancelled")}}selected{{/if}}>CANCELLED</option>
+                                    </select>
+                                    <span class="msi">arrow_drop_down</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ex-table__actions">
+                                    <a href="/orders/{{id}}" class="ex-btn ex-btn--ghost ex-btn--sm">DETAILS</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p class="ex-empty">NO ORDERS FOUND.</p>
+            {{/if}}
+        </section>
+
+        <div class="ex-panel ex-pager">
+            <div class="ex-pager__status"><span class="ex-dot"></span><span>PAGE {{currentPage}} • {{orders.length}} ORDERS</span></div>
+            <nav class="ex-pager__nav" aria-label="Order pagination">
+                {{#if (gt currentPage 1)}}
+                    <a class="ex-pagebtn" href="/orders/admin/all?page={{subtract currentPage 1}}">PREV</a>
+                {{else}}
+                    <span class="ex-pagebtn is-disabled" aria-disabled="true">PREV</span>
+                {{/if}}
+                <span class="ex-pagebtn is-current" aria-current="page">{{currentPage}}</span>
+                {{#if (eq orders.length 20)}}
+                    <a class="ex-pagebtn" href="/orders/admin/all?page={{add currentPage 1}}">NEXT</a>
+                {{else}}
+                    <span class="ex-pagebtn is-disabled" aria-disabled="true">NEXT</span>
+                {{/if}}
+            </nav>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+
+    <script>
+        document.querySelectorAll('.status-select').forEach(select => {
+            select.addEventListener('change', async () => {
+                const orderId = select.dataset.orderId;
+                const newStatus = select.value;
+                select.disabled = true;
+                try {
+                    const response = await fetch(`/orders/${orderId}/status`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'x-csrf-token': getCsrfToken()
+                        },
+                        body: JSON.stringify({ status: newStatus })
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (response.ok) {
+                        select.dataset.current = newStatus;
+                        exToast(`Order #${orderId} → ${newStatus.toUpperCase()}`);
+                    } else {
+                        select.value = select.dataset.current;
+                        exToast(data.message || 'Error updating order status', true);
+                    }
+                } catch (error) {
+                    select.value = select.dataset.current;
+                    exToast('Error updating order status', true);
+                } finally {
+                    select.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
