@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Logs - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="logs"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Audit trail</span>
+                <h1 class="ex-h1">Security Logs</h1>
+                <p class="ex-lead">Security events and user activity from the application log.</p>
+            </div>
+        </div>
+
+        <section class="ex-panel">
+            <div class="ex-panel__head">
+                <span class="ex-panel__title"><span class="msi">security</span>Events</span>
+                <span class="ex-chip ex-chip--muted">{{logs.length}} ENTRIES</span>
+            </div>
+            {{#if logs}}
+            <div class="ex-table-wrap">
+                <table class="ex-table ex-table--logs">
+                    <thead><tr><th>Timestamp</th><th>Action</th><th>User</th><th>IP address</th><th>Details</th></tr></thead>
+                    <tbody>
+                        {{#each logs}}
+                        <tr>
+                            <td class="mono ex-muted">{{timestamp}}</td>
+                            <td>
+                                <span class="ex-status {{#if (eq action "Failed login attempt")}}ex-status--danger{{else if (eq action "ERROR")}}ex-status--danger{{else if (eq action "WARN")}}ex-status--pending{{else}}ex-status--processing{{/if}}">{{action}}</span>
+                            </td>
+                            <td class="mono">{{#if user}}{{user}}{{else}}—{{/if}}</td>
+                            <td class="mono">{{#if ip}}{{ip}}{{else}}—{{/if}}</td>
+                            <td>{{#if details}}{{details}}{{else}}{{message}}{{/if}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p class="ex-empty">NO SECURITY LOGS AVAILABLE.</p>
+            {{/if}}
+        </section>
+
+        <div class="ex-alert ex-alert--info">
+            <span class="msi">lock</span>
+            <span>Security logs are retained for 90 days. For longer retention or detailed analysis, contact the system administrator.</span>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

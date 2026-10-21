@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="dashboard"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Overview</span>
+                <h1 class="ex-h1">Admin Dashboard</h1>
+            </div>
+            <a href="/products/admin/new" class="ex-btn ex-btn--solid"><span class="msi">add</span>ADD PRODUCT</a>
+        </div>
+
+        <div class="ex-stats">
+            <div class="ex-panel ex-stat">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Total users</span><span class="msi">group</span></div>
+                <div class="ex-stat__value">{{stats.users}}</div>
+                <a class="ex-stat__hint" href="/admin/users">Manage users →</a>
+            </div>
+            <div class="ex-panel ex-stat ex-stat--cyan">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Total products</span><span class="msi">inventory_2</span></div>
+                <div class="ex-stat__value">{{stats.products}}</div>
+                <a class="ex-stat__hint" href="/products/admin">Manage products →</a>
+            </div>
+            <div class="ex-panel ex-stat">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Total orders</span><span class="msi">receipt_long</span></div>
+                <div class="ex-stat__value">{{stats.orders}}</div>
+                <a class="ex-stat__hint" href="/orders/admin/all">View all orders →</a>
+            </div>
+            <div class="ex-panel ex-stat ex-stat--cyan">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Revenue</span><span class="msi">payments</span></div>
+                <div class="ex-stat__value">${{#if stats.revenue}}{{formatPrice stats.revenue}}{{else}}0.00{{/if}}</div>
+                <a class="ex-stat__hint" href="/admin/analytics">Excludes cancelled orders →</a>
+            </div>
+        </div>
+
+        <div class="ex-layout">
+            <section class="ex-panel">
+                <div class="ex-panel__head">
+                    <span class="ex-panel__title"><span class="msi">receipt_long</span>Recent orders</span>
+                    <a href="/orders/admin/all" class="ex-btn ex-btn--ghost ex-btn--sm">VIEW ALL</a>
+                </div>
+                {{#if recentOrders}}
+                <div class="ex-table-wrap">
+                    <table class="ex-table">
+                        <thead>
+                            <tr><th>Order</th><th>Customer</th><th>Status</th><th>Date</th><th class="ex-right">Total</th></tr>
+                        </thead>
+                        <tbody>
+                            {{#each recentOrders}}
+                            <tr>
+                                <td><a class="mono ex-strong" href="/orders/{{id}}">#{{id}}</a></td>
+                                <td>{{#if user.username}}{{user.username}}{{else}}—{{/if}}</td>
+                                <td><span class="ex-status ex-status--{{status}}">{{status}}</span></td>
+                                <td class="mono ex-muted">{{formatDate created_at}}</td>
+                                <td class="mono ex-strong ex-right">${{formatPrice total_amount}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{else}}
+                <p class="ex-empty">NO RECENT ORDERS.</p>
+                {{/if}}
+            </section>
+
+            <aside class="ex-panel">
+                <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">tune</span>Quick actions</span></div>
+                <div class="ex-panel__body ex-stack" style="gap: 8px;">
+                    <a href="/products/admin/new" class="ex-btn ex-btn--emerald ex-btn--block"><span class="msi">add</span>ADD NEW PRODUCT</a>
+                    <a href="/products/admin" class="ex-btn ex-btn--cyan ex-btn--block"><span class="msi">inventory_2</span>MANAGE PRODUCTS</a>
+                    <a href="/admin/users" class="ex-btn ex-btn--cyan ex-btn--block"><span class="msi">group</span>MANAGE USERS</a>
+                    <a href="/orders/admin/all" class="ex-btn ex-btn--cyan ex-btn--block"><span class="msi">receipt_long</span>ALL ORDERS</a>
+                    <a href="/admin/analytics" class="ex-btn ex-btn--ghost ex-btn--block"><span class="msi">bar_chart</span>ANALYTICS</a>
+                    <a href="/admin/logs" class="ex-btn ex-btn--ghost ex-btn--block"><span class="msi">security</span>SECURITY LOGS</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    {{> elite_footer}}
+</body>
+</html>

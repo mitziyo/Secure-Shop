@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SecureShop Elite</title>
+    {{> elite_head}}
+</head>
+<body class="elite">
+    {{> elite_header nav="admin"}}
+
+    <main class="ex-container ex-page">
+        {{> elite_admin_nav section="analytics"}}
+
+        <div class="ex-page-head">
+            <div>
+                <span class="ex-eyebrow">Telemetry</span>
+                <h1 class="ex-h1">Analytics</h1>
+            </div>
+        </div>
+
+        <div class="ex-stats">
+            <div class="ex-panel ex-stat">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Active months</span><span class="msi">bar_chart</span></div>
+                <div class="ex-stat__value">{{revenueData.length}}</div>
+                <span class="ex-stat__hint">Months with recorded revenue</span>
+            </div>
+            <div class="ex-panel ex-stat ex-stat--cyan">
+                <div class="ex-stat__label"><span class="ex-eyebrow">Products sold</span><span class="msi">inventory_2</span></div>
+                <div class="ex-stat__value">{{topProducts.length}}</div>
+                <span class="ex-stat__hint">Distinct products in top sellers</span>
+            </div>
+        </div>
+
+        <section class="ex-panel">
+            <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">payments</span>Revenue over time</span></div>
+            <div class="ex-panel__body">
+                {{#if revenueData}}
+                <div class="ex-chart"><canvas id="revenueChart" aria-label="Monthly revenue chart" role="img"></canvas></div>
+                {{else}}
+                <p class="ex-empty">NO REVENUE DATA YET.</p>
+                {{/if}}
+            </div>
+        </section>
+
+        <section class="ex-panel">
+            <div class="ex-panel__head"><span class="ex-panel__title"><span class="msi">list_alt</span>Top selling products</span></div>
+            {{#if topProducts}}
+            <div class="ex-table-wrap">
+                <table class="ex-table">
+                    <thead><tr><th>#</th><th>Product</th><th class="ex-right">Units sold</th><th class="ex-right">Revenue</th></tr></thead>
+                    <tbody>
+                        {{#each topProducts}}
+                        <tr>
+                            <td class="mono ex-muted">{{add @index 1}}</td>
+                            <td class="ex-strong">{{name}}</td>
+                            <td class="mono ex-right">{{total_sold}}</td>
+                            <td class="mono ex-strong ex-right">${{formatPrice revenue}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p class="ex-empty">NO SALES DATA AVAILABLE.</p>
+            {{/if}}
+        </section>
+    </main>
+
+    {{> elite_footer}}
+
+    {{#if revenueData}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        (function () {
+            const revenueData = {{{json revenueData}}};
+            const canvas = document.getElementById('revenueChart');
+            if (!canvas || typeof Chart === 'undefined') return;
+
+            const ctx = canvas.getContext('2d');
+            const fill = ctx.createLinearGradient(0, 0, 0, 280);
+            fill.addColorStop(0, 'rgba(0, 255, 157, 0.25)');
+            fill.addColorStop(1, 'rgba(0, 255, 157, 0)');
+
+            Chart.defaults.color = '#b9cbbc';
+            Chart.defaults.font.family = "'JetBrains Mono', monospace";
+            Chart.defaults.font.size = 11;
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: revenueData.map(item => new Date(item.month).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
+                    datasets: [{
+                        label: 'Revenue',
+                        data: revenueData.map(item => parseFloat(item.revenue)),
+                        borderColor: '#00ff9d',
+                        backgroundColor: fill,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#00ff9d',
+                        pointRadius: 3,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0f141c',
+                            borderColor: 'rgba(0, 255, 157, 0.4)',
+                            borderWidth: 1,
+                            callbacks: { label: (item) => '$' + item.parsed.y.toFixed(2) }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(59, 74, 63, 0.25)' } },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(59, 74, 63, 0.25)' },
+                            ticks: { callback: (value) => '$' + value }
+                        }
+                    }
+                }
+            });
+        })();
+    </script>
+    {{/if}}
+</body>
+</html>
