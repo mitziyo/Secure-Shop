@@ -38,6 +38,38 @@
   "author": "KHAN",
   "license": "ISC",
   "type": "commonjs",
+  "//": {
+    "note": "JSON has no comments; npm ignores this \"//\" field. It explains what each dependency is for.",
+    "dependencies": {
+      "bcryptjs": "Hashes and verifies user passwords (bcrypt, BCRYPT_ROUNDS from .env)",
+      "connect-pg-simple": "Stores Express sessions in the PostgreSQL 'session' table",
+      "cors": "Restricts which origins may call the server (Cross-Origin Resource Sharing)",
+      "csurf": "Issues and checks CSRF tokens on forms and AJAX requests",
+      "dotenv": "Loads configuration and secrets from the .env file into process.env",
+      "express": "Web framework: HTTP server, routing and middleware",
+      "express-rate-limit": "Limits requests per IP (global limit and stricter login/register limit)",
+      "express-session": "Cookie-based user sessions (httpOnly, sameSite) for login state",
+      "express-validator": "Validates and sanitizes form and API input on the server",
+      "hbs": "Handlebars template engine that renders the views/ pages",
+      "helmet": "Sets security HTTP headers such as CSP, HSTS and X-Frame-Options",
+      "jsonwebtoken": "Creates and verifies JWT tokens (middleware/auth.js verifyToken)",
+      "pg": "PostgreSQL driver used by Sequelize and by raw queries in config/database.js",
+      "pg-hstore": "Serializes hstore values; required by Sequelize's PostgreSQL dialect",
+      "sequelize": "ORM: models, associations and parameterized queries (prevents SQL injection)",
+      "uuid": "Generates unique IDs; only used by the test-admin-update.js helper script",
+      "winston": "Structured application and security logging (utils/logger.js)",
+      "winston-daily-rotate-file": "Writes logs to logs/ and rotates the files daily"
+    },
+    "devDependencies": {
+      "@types/jest": "Type definitions that give editors autocomplete for Jest",
+      "docx": "Generates Word (.docx) documents; not used by the application code",
+      "eslint": "JavaScript linter behind npm run lint (no config file in the repo yet)",
+      "jest": "Test runner for the unit, integration and security tests",
+      "nodemon": "Restarts the server automatically on file changes (npm run dev)",
+      "sequelize-cli": "Sequelize command line tool behind npm run db:migrate",
+      "supertest": "Sends HTTP requests to the Express app inside tests"
+    }
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "connect-pg-simple": "^10.0.0",
